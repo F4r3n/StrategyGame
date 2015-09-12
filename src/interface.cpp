@@ -9,5 +9,15 @@ void Interface::draw(sf::RenderWindow &window) {
 }
 
 void Interface::update(float dt) {
+	border->update(dt);
+}
 
+
+void Interface::update(float dt, sf::View &view) {
+	border->update(dt, view);
+	
+}
+
+Interface::~Interface() {
+	delete border;
 }

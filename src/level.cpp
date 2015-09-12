@@ -31,4 +31,5 @@ void Level::draw(sf::RenderWindow &window){
 void Level::update(float dt) {
 	map->update(dt);
 	player->update(dt,map);
+	interface->update(dt, view);
 }

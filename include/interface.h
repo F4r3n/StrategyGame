@@ -8,6 +8,8 @@ class Interface : public Screen{
 		Interface();
 		void draw(sf::RenderWindow &window);
 		void update(float dt);
+		void update(float dt, sf::View &view);
+		~Interface();
 	private:
 		UIBorder *border;
 };

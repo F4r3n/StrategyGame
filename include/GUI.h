@@ -8,12 +8,16 @@
 class GUI {
 	public:
 		GUI();
-		GUI(Box box, sf::Color color);
+		~GUI();
+		GUI(Box *box, sf::Color color, sf::Color highlightColor);
 		void draw(sf::RenderWindow &window);
+		bool cursorIn(float x, float y);
 	private:
 		sf::RectangleShape *shape;
+
+		Box *box;
 		sf::Color color;
-		Box box;
+		sf::Color highlightColor;
 		float x,y;
 };
 
