@@ -3,7 +3,7 @@
 Player::Player() {
 }
 
-void Player::update(float dt, Map *map) {
+void Player::update(float dt, Map *map, Interface *interface) {
 	
 }
 

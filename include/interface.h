@@ -3,6 +3,8 @@
 
 #include "screen.h"
 #include "uiborder.h"
+#include "statusBar.h"
+
 class Interface : public Screen{
 	public:
 		Interface();
@@ -12,6 +14,8 @@ class Interface : public Screen{
 		~Interface();
 	private:
 		UIBorder *border;
+		StatusBar *statusBar;
+		
 };
 
 #endif

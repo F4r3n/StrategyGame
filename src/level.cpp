@@ -30,6 +30,6 @@ void Level::draw(sf::RenderWindow &window){
 
 void Level::update(float dt) {
 	map->update(dt);
-	player->update(dt,map);
+	player->update(dt,map, interface);
 	interface->update(dt, view);
 }
