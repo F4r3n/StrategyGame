@@ -21,6 +21,10 @@ void StatusBar::update(float dt) {
 
 }
 
+void StatusBar::setPortrait(Portrait *por) {
+
+}
+
 
 StatusBar::~StatusBar() {
 	delete shape;

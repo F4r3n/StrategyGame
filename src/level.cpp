@@ -21,6 +21,12 @@ Level::~Level(){
 void Level::draw(sf::RenderWindow &window){
 
 	window.setView(view);
+	sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
+
+	// conversion en coordonnées "monde"
+	sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
+	pos.x = worldPos.x;
+	pos.y = worldPos.y;
 	map->draw(window);
 	player->draw(window);
 	window.setView(window.getDefaultView());
@@ -30,6 +36,6 @@ void Level::draw(sf::RenderWindow &window){
 
 void Level::update(float dt) {
 	map->update(dt);
-	player->update(dt,map, interface);
+	player->update(dt,map, interface, pos);
 	interface->update(dt, view);
 }

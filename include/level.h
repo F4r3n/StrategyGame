@@ -2,9 +2,7 @@
 #define LEVEL_H
 
 #include "screen.h"
-#include "map.h"
 #include "player.h"
-#include "interface.h"
 
 class Level: public Screen {
 	public:
@@ -18,6 +16,7 @@ class Level: public Screen {
 		Map *map;
 		Player *player;
 		int centerX, centerY;
+		Point pos;
 
 };
 
