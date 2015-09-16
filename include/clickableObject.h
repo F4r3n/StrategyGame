@@ -9,17 +9,18 @@ class ClickableObject {
 	public:
 		ClickableObject();
 		ClickableObject(int belonging);
-		void draw(sf::RenderWindow &window);
-		void update(float dt, Point posMouse, StatusBar *statusBar);
+		virtual void draw(sf::RenderWindow &window);
+		virtual void update(float dt, Point posMouse, StatusBar *statusBar);
 		bool isSelected(Point posMouse);
 		int getId();
 		void deselect();
-		~ClickableObject();
+		virtual ~ClickableObject();
 
 	protected:
 		int belonging;
 		bool selected;
 		sf::RectangleShape *shape;
+		Point casePosition;
 		Box *box;
 
 		static int id;

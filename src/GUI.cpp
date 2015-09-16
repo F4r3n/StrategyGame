@@ -24,5 +24,7 @@ bool GUI::cursorIn(float x, float y) {
 }
 
 GUI::~GUI() {
+	delete shape;
+	delete box;
 //	delete shape;
 }

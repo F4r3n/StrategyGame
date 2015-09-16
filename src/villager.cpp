@@ -5,7 +5,8 @@ Villager::Villager() {
 }
 
 Villager::~Villager(){
-
+	delete shape;
+	delete box;
 }
 
 Villager::Villager(int belonging, Point pos, int life, float attack): Unit(belonging,  pos, life) {
@@ -26,5 +27,7 @@ void Villager::draw(sf::RenderWindow &window) {
 
 }
 
-void Villager::update(float dt, Point posMouse) {
+void Villager::update(float dt, Point posMouse, Map *map) {
+	Unit::update(dt,posMouse,map);
+	//if(box == 0) std::cout << "null" << std::endl;
 }

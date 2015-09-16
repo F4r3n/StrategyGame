@@ -13,7 +13,8 @@ sf::RectangleShape* Box::getShape() {
 }
 
 Box::Box() {
-
+	
+	shape = new sf::RectangleShape();
 }
 
 Box::~Box() {

@@ -15,11 +15,13 @@ class Player {
 		void update(float dt, Map *map, Interface *interface, Point pos);
 		void draw(sf::RenderWindow &window);
 		void refreshGroups();
+		~Player();
 
 	private:
 		std::vector<Unit*> *units; 
-		std::vector<Group> groups; 
+		std::vector<Group*> *groups; 
 		Interface *interface;
+		Group *currentGroup;
 
 };
 

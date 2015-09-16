@@ -17,11 +17,14 @@ bool  Unit::isGrouped() {
 	return hasGroup;
 }
 
-void Unit::setGroup() {
-	hasGroup = true;
+void Unit::setGroup(bool val) {
+	hasGroup = val;
 }
 
-void Unit::update(float dt, Point posMouse) {
+void Unit::update(float dt, Point posMouse, Map *map) {
+	casePosition = map->getPos(currentPos);
+//	box->x = currentPos.x;
+//	box->y = currentPos.y;
 }
 
 Unit::~Unit() {

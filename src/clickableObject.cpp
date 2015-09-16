@@ -23,14 +23,11 @@ int ClickableObject::getId() {
 }
 
 bool ClickableObject::isSelected(Point posMouse) {
-	if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 		bool touched = box->pointer(posMouse);
 		if(touched) {
 			return true;
 		}
 		return false; 
-	}
-	return false;
 }
 
 void ClickableObject::deselect() {

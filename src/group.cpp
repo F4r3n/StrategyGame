@@ -1,13 +1,34 @@
 #include "group.h"
+#include <iostream>
 
 int Group::idGroup = 0;
 
-Group::Group() {
+Group::Group(std::vector<Unit*> *listUnits) {
+	
 	idGroup++;
 	units = new std::map<int,Unit*>();
+	for(auto *unit : *listUnits) {
+
+	units->insert(std::pair<int, Unit*>(unit->getId(), unit));
+	unit->idGroup = idGroup;
+	}
 }
 
-Group::~Group() {}
+Group::Group(Unit *unit) {
+
+	idGroup++;
+	units = new std::map<int,Unit*>();
+
+	units->insert(std::pair<int, Unit*>(unit->getId(), unit));
+	unit->idGroup = idGroup;
+}
+
+Group::Group() {
+}
+
+Group::~Group() {
+	delete units;
+}
 
 bool Group::isExist(int id) {
 	for(auto &m : *units) {

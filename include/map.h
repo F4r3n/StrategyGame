@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "point.h"
 
 class Map {
 	public:
@@ -13,6 +14,9 @@ class Map {
 		Map(int w, int h, int wt, int ht);
 		void draw(sf::RenderWindow &window);
 		void update(float dt);
+		Point getSizeMap();
+		Point getSizeTile();
+		Point getPos(Point pos);
 		~Map();
 	
 	private:

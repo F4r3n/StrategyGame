@@ -18,6 +18,18 @@ Map::Map(int w, int h, int wt, int ht): widthMap(w), heightMap(h), widthTile(wt)
 
 }
 
+Point Map::getPos(Point pos) {
+	return Point(pos.x/widthTile, pos.y/heightTile);
+}
+
+Point Map::getSizeMap() {
+	return Point(widthMap, heightMap);
+}
+
+Point Map::getSizeTile() {
+	return Point(widthTile, heightTile);
+}
+
 Map::Map(const std::string &path) {
 
 	tiles = new std::vector<sf::RectangleShape*>();

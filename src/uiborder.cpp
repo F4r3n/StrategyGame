@@ -60,5 +60,7 @@ void UIBorder::update(float dt, sf::View &view) {
 }
 
 UIBorder::~UIBorder() {
-	borders.clear();
+	for(auto *border : borders)
+		delete border;
+	
 }
