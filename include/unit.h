@@ -10,11 +10,16 @@ class Unit: public ClickableObject {
 		~Unit();
 		virtual void draw(sf::RenderWindow &window);
 		virtual void update(float dt, Point posMouse);
+		bool isGrouped();
+		void setGroup();
+		int idGroup;
 
 	protected:
 		Point currentPos;
 		Point arrivalPos;
 		int life;
+		bool hasGroup = false;
+
 };
 
 #endif

@@ -2,7 +2,14 @@
 
 #include <iostream>
 Box::Box(float x,float w, float y, float h) : x(x), w(w),y(y),h(h) {
+	shape = new sf::RectangleShape();
+	shape->setSize(sf::Vector2f(w,h));
+	shape->setPosition(x,y);
+	shape->setFillColor(sf::Color::Black);
+}
 
+sf::RectangleShape* Box::getShape() {
+	return shape;
 }
 
 Box::Box() {
@@ -10,7 +17,7 @@ Box::Box() {
 }
 
 Box::~Box() {
-
+	delete shape;
 }
 
 float Box::getCenterX() {
@@ -43,3 +50,6 @@ bool Box::pointer(float cx, float cy) {
 
 }
 
+bool Box::pointer(Point pos) {
+	return pointer(pos.x, pos.y);
+}

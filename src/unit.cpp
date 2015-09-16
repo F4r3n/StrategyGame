@@ -1,7 +1,7 @@
 #include "unit.h"
 #include <iostream>
-Unit::Unit() {
 
+Unit::Unit() {
 }
 
 Unit::Unit(int belonging, Point pos, int life):ClickableObject(belonging) {
@@ -11,6 +11,14 @@ Unit::Unit(int belonging, Point pos, int life):ClickableObject(belonging) {
 
 void Unit::draw(sf::RenderWindow &window){
 
+}
+
+bool  Unit::isGrouped() {
+	return hasGroup;
+}
+
+void Unit::setGroup() {
+	hasGroup = true;
 }
 
 void Unit::update(float dt, Point posMouse) {

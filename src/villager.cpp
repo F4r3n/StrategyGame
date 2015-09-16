@@ -15,11 +15,15 @@ Villager::Villager(int belonging, Point pos, int life, float attack): Unit(belon
 	shape->setOutlineColor(sf::Color::Red);
 	shape->setOutlineThickness(5);
 	shape->setPosition(pos.x, pos.y);
+	box = new Box(pos.x, 20, pos.y ,20);
+
 }
 
 
 void Villager::draw(sf::RenderWindow &window) {
 	window.draw(*shape);
+//	window.draw(*box->getShape());
+
 }
 
 void Villager::update(float dt, Point posMouse) {

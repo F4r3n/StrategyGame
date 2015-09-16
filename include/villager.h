@@ -15,6 +15,7 @@ class Villager : public Unit {
 	private:
 		float attack;
 		sf::CircleShape *shape;
+		sf::RectangleShape *bs;
 };
 
 #endif

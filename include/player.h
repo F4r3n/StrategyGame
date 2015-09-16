@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include "map.h"
+#include "group.h"
 #include "interface.h"
 #include <SFML/Graphics.hpp>
 #include <vector>
@@ -13,9 +14,11 @@ class Player {
 		Player();
 		void update(float dt, Map *map, Interface *interface, Point pos);
 		void draw(sf::RenderWindow &window);
+		void refreshGroups();
 
 	private:
 		std::vector<Unit*> *units; 
+		std::vector<Group> groups; 
 		Interface *interface;
 
 };
