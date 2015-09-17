@@ -4,6 +4,8 @@
 #include "GUI.h"
 #include "screen.h"
 #include "portrait.h"
+#include <vector>
+#include "action.h"
 
 class StatusBar : public Screen {
 	public:
@@ -14,11 +16,14 @@ class StatusBar : public Screen {
 		void update(float dt);
 
 		void setPortrait(Portrait *por);
+		void setActions(std::vector<Action*> actions);
 	private:
 		float position;
 		sf::Color color;
 		Portrait *por;
 		sf::RectangleShape *shape;
+		std::vector<Action*> actions;
+		
 
 
 

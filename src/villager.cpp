@@ -1,5 +1,6 @@
 #include "villager.h"
 #include <iostream>
+#include "typeUnit.h"
 Villager::Villager() {
 
 }
@@ -10,6 +11,7 @@ Villager::~Villager(){
 }
 
 Villager::Villager(int belonging, Point pos, int life, float attack): Unit(belonging,  pos, life) {
+	type = TypeUnit::VILLAGER;
 	this->attack = attack;
 	shape = new sf::CircleShape();
 	shape->setRadius(10);

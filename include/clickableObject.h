@@ -5,6 +5,7 @@
 #include "point.h"
 #include "statusBar.h"
 
+#include "action.h"
 class ClickableObject {
 	public:
 		ClickableObject();
@@ -12,6 +13,7 @@ class ClickableObject {
 		virtual void draw(sf::RenderWindow &window);
 		virtual void update(float dt, Point posMouse, StatusBar *statusBar);
 		bool isSelected(Point posMouse);
+		std::vector<Action*> getActions();
 		int getId();
 		void deselect();
 		virtual ~ClickableObject();
@@ -22,7 +24,7 @@ class ClickableObject {
 		sf::RectangleShape *shape;
 		Point casePosition;
 		Box *box;
-
+		std::vector<Action*> actions;
 		static int id;
 
 };

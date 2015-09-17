@@ -21,6 +21,9 @@ Group::Group(Unit *unit) {
 
 	units->insert(std::pair<int, Unit*>(unit->getId(), unit));
 	unit->idGroup = idGroup;
+	for(Action *act :unit->getActions()) {
+		moves[act->getAct()] = act;
+	}
 }
 
 Group::Group() {
@@ -50,4 +53,14 @@ void Group::refreshGroup() {
 void Group::addUnit(Unit *unit) {
 	units->insert(std::pair<int, Unit*>(unit->getId(), unit));
 	unit->idGroup = idGroup;
+}
+
+std::vector<Action*> Group::allowedAction() {
+	std::vector<Action*> mo;
+	if(!isMixed) {
+		for(auto m : moves){
+			mo.push_back(m.second);
+		}
+	}
+	return mo;
 }

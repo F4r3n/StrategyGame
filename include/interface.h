@@ -11,6 +11,7 @@ class Interface : public Screen{
 		void draw(sf::RenderWindow &window);
 		void update(float dt);
 		void update(float dt, sf::View &view);
+		void sendInterfaceActions(std::vector<Action*> actions);
 		~Interface();
 	private:
 		UIBorder *border;

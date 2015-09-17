@@ -17,18 +17,22 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos) {
 					Group *gr = new Group(unit);
 					groups->push_back(gr);
 					currentGroup = gr;
-					
+					sendActionsInterface(interface);	
 				}
 			}
 		}
 	}
 }
 
+void Player::sendActionsInterface(Interface *interface) {
+	interface->sendInterfaceActions(currentGroup->allowedAction());
+}
+
 Player::~Player() {
 
 	for(auto *u :*units)
 		delete u;
-		
+
 	delete units;
 	for(auto *gr :*groups)
 		delete gr;

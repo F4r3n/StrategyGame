@@ -19,6 +19,9 @@ void Interface::update(float dt, sf::View &view) {
 	border->update(dt, view);
 	
 }
+void Interface::sendInterfaceActions(std::vector<Action*> actions) {
+	statusBar->setActions(actions);
+}
 
 Interface::~Interface() {
 	delete border;

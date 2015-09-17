@@ -3,6 +3,7 @@
 #include "clickableObject.h"
 #include "point.h"
 #include "map.h"
+
 class Unit: public ClickableObject {
 	public:
 		Unit();
@@ -13,12 +14,14 @@ class Unit: public ClickableObject {
 		bool isGrouped();
 		void setGroup(bool val);
 		int idGroup = -1;
+		int type = -1;
 
 	protected:
 		Point currentPos;
 		Point arrivalPos;
 		int life;
 		bool hasGroup = false;
+
 
 };
 

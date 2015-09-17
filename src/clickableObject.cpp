@@ -34,6 +34,9 @@ void ClickableObject::deselect() {
 	selected = false;
 }
 
+std::vector<Action*> ClickableObject::getActions() {
+	return actions;
+}
 void ClickableObject::draw(sf::RenderWindow &window){
 }
 

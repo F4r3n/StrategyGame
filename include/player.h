@@ -8,13 +8,14 @@
 #include <vector>
 #include "villager.h"
 #include "point.h"
-
+#include "action.h"
 class Player {
 	public :
 		Player();
 		void update(float dt, Map *map, Interface *interface, Point pos);
 		void draw(sf::RenderWindow &window);
 		void refreshGroups();
+		void sendActionsInterface(Interface *interface);
 		~Player();
 
 	private:
@@ -22,6 +23,8 @@ class Player {
 		std::vector<Group*> *groups; 
 		Interface *interface;
 		Group *currentGroup;
+		Action *selectedAction;
+
 
 };
 

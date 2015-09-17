@@ -26,6 +26,10 @@ void StatusBar::setPortrait(Portrait *por) {
 }
 
 
+void StatusBar::setActions(std::vector<Action*> actions) {
+	this->actions = actions;
+}
+
 StatusBar::~StatusBar() {
 	delete shape;
 }

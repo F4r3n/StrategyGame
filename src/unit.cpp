@@ -7,6 +7,7 @@ Unit::Unit() {
 Unit::Unit(int belonging, Point pos, int life):ClickableObject(belonging) {
 	currentPos = pos;
 	this->life = life;
+	actions.push_back(new Action(Move::STRAIGHT_AT_CLICK));
 }
 
 void Unit::draw(sf::RenderWindow &window){

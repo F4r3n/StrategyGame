@@ -4,6 +4,7 @@
 #include <map>
 #include <vector>
 #include "unit.h"
+
 class Group {
 	public:
 		Group();
@@ -13,9 +14,12 @@ class Group {
 		void addUnit(Unit *unit);
 		bool isExist(int id);
 		void refreshGroup();
+		std::vector<Action*> allowedAction();
 	private:
 		static int idGroup;
 		std::map<int,Unit*> *units;
+		std::map<Move,Action*> moves;
+		bool isMixed = false;
 		
 
 };
