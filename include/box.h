@@ -11,7 +11,7 @@ class Box {
 		Box();
 		float getCenterX();
 		float getCenterY();
-
+		void configure(Point size, Point pos, sf::Color color);
 		~Box();
 		bool AABB(Box *b);
 		bool pointer(float x, float y);

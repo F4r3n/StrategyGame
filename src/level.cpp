@@ -14,15 +14,16 @@ Level::Level() {
 
 Level::~Level(){
 	delete map;
-	delete player;
 	delete interface;
+	delete player;
 }
 
 void Level::draw(sf::RenderWindow &window){
 
 	window.setView(view);
 	sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
-
+	posMouseWindow.x = pixelPos.x;
+	posMouseWindow.y = pixelPos.y;
 	// conversion en coordonnées "monde"
 	sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
 	pos.x = worldPos.x;
@@ -36,6 +37,6 @@ void Level::draw(sf::RenderWindow &window){
 
 void Level::update(float dt) {
 	map->update(dt);
-	player->update(dt,map, interface, pos);
+	player->update(dt,map, interface, pos, posMouseWindow);
 	interface->update(dt, view);
 }

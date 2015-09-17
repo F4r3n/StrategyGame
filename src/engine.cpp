@@ -21,9 +21,6 @@ void Engine::run() {
 		update(dt);	
 		while (window.pollEvent(event))
 		{
-
-			//	std::cout << "dt " << dt <<std::endl; 
-
 			if (event.type == sf::Event::Closed) {
 				window.close();
 			}
@@ -40,7 +37,8 @@ void Engine::setScreen(Screen *screen) {
 }
 
 void Engine::init() {
-	setScreen(new Game());
+	game = new Game();
+	setScreen(game);
 }
 
 void Engine::draw(sf::RenderWindow &window) {
@@ -52,5 +50,5 @@ void Engine::update(float dt) {
 }
 
 Engine::~Engine() {
-	delete _screen;
+	delete game;
 }

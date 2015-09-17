@@ -15,6 +15,11 @@ void GUI::draw(sf::RenderWindow &window) {
 	window.draw(*shape);
 }
 
+
+Box* GUI::getBox() {
+	return box;
+}
+
 bool GUI::cursorIn(float x, float y) {
 	bool val = box->pointer(x,y);
 	if(val) {

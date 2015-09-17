@@ -14,9 +14,10 @@ class StatusBar : public Screen {
 		void draw(sf::RenderWindow &window);
 		void drawPortrait(sf::RenderWindow &window, sf::RectangleShape *shape);
 		void update(float dt);
-
+		float getPositionBar();
+		std::vector<Action*> getActions();
 		void setPortrait(Portrait *por);
-		void setActions(std::vector<Action*> actions);
+		void setActions(std::vector<Action*> &actions);
 	private:
 		float position;
 		sf::Color color;

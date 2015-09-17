@@ -12,7 +12,7 @@
 class Player {
 	public :
 		Player();
-		void update(float dt, Map *map, Interface *interface, Point pos);
+		void update(float dt, Map *map, Interface *interface, Point pos, Point posMouseWindow);
 		void draw(sf::RenderWindow &window);
 		void refreshGroups();
 		void sendActionsInterface(Interface *interface);
@@ -24,6 +24,9 @@ class Player {
 		Interface *interface;
 		Group *currentGroup;
 		Action *selectedAction;
+		std::vector<Action*> actions;
+		bool groupSelected = false;
+		Point mousePosWindow;
 
 
 };

@@ -46,8 +46,8 @@ void Map::update(float dt) {
 }
 
 Map::~Map() {
-	tiles->clear();
-	tiles->pop_back();
+	for(auto &tile : *tiles)
+		delete tile;
 	delete tiles;
 }
 

@@ -21,6 +21,7 @@ class Engine {
 	private:
 		bool running = false;
 		Screen *_screen;
+		Game *game;
 };
 
 #endif

@@ -12,6 +12,7 @@ class GUI {
 		GUI(Box *box, sf::Color color, sf::Color highlightColor);
 		void draw(sf::RenderWindow &window);
 		bool cursorIn(float x, float y);
+		Box* getBox();
 	private:
 		sf::RectangleShape *shape;
 

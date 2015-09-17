@@ -10,16 +10,22 @@ void Interface::draw(sf::RenderWindow &window) {
 	statusBar->draw(window);
 }
 
+float Interface::getPositionBar() {
+	return statusBar->getPositionBar();
+}
 void Interface::update(float dt) {
 	border->update(dt);
 }
 
+std::vector<Action*> Interface::getActions() {
+	return statusBar->getActions();
+}
 
 void Interface::update(float dt, sf::View &view) {
 	border->update(dt, view);
 	
 }
-void Interface::sendInterfaceActions(std::vector<Action*> actions) {
+void Interface::sendInterfaceActions(std::vector<Action*> &actions) {
 	statusBar->setActions(actions);
 }
 

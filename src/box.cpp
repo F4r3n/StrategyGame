@@ -17,6 +17,17 @@ Box::Box() {
 	shape = new sf::RectangleShape();
 }
 
+void Box::configure(Point size, Point pos, sf::Color color) {
+	shape->setSize(sf::Vector2f(size.x,size.y));
+	shape->setPosition(pos.x, pos.y);
+
+	shape->setFillColor(color);
+	x = pos.x;
+	y = pos.y;
+	w = size.x;
+	h = size.y;
+
+}
 Box::~Box() {
 	delete shape;
 }

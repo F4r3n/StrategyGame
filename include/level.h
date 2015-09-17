@@ -17,6 +17,7 @@ class Level: public Screen {
 		Player *player;
 		int centerX, centerY;
 		Point pos;
+		Point posMouseWindow;
 
 };
 

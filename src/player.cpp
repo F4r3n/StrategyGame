@@ -6,7 +6,7 @@ Player::Player() {
 	units->push_back(new Villager(0, Point(100,100),100,10));
 }
 
-void Player::update(float dt, Map *map, Interface *interface, Point pos) {
+void Player::update(float dt, Map *map, Interface *interface, Point pos, Point posMouseWindow) {
 	for(auto *unit : *units) {
 		unit->update(dt, pos,map);
 
@@ -17,7 +17,19 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos) {
 					Group *gr = new Group(unit);
 					groups->push_back(gr);
 					currentGroup = gr;
-					sendActionsInterface(interface);	
+					sendActionsInterface(interface);
+					groupSelected = true;
+				}
+			}
+		}
+	}
+	if(groupSelected) {
+		//	std::cout << posMouseWindow.x << std::endl;
+		//	std::cout << actions[0]->getBox()->x << std::endl;
+		if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+			for(auto *act : actions) {
+				if(act->cursorIn(posMouseWindow)) {
+					std::cout << act->getAct() << std::endl;
 				}
 			}
 		}
@@ -25,7 +37,9 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos) {
 }
 
 void Player::sendActionsInterface(Interface *interface) {
-	interface->sendInterfaceActions(currentGroup->allowedAction());
+	actions = currentGroup->allowedAction();
+	interface->sendInterfaceActions(actions);
+	std::cout << actions[0]->getBox()->x << std::endl;
 }
 
 Player::~Player() {
