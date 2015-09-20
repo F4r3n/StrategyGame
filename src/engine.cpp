@@ -1,5 +1,5 @@
 #include "engine.h"
-
+#include "input.h"
 
 Engine::Engine() {
 	
@@ -10,6 +10,7 @@ void Engine::run() {
 	sf::RenderWindow window(sf::VideoMode(EngineConst::WIDTH, EngineConst::HEIGHT), "SFML works!");
 	sf::Clock clock;
 	init();
+	Input input;
 
 	while (window.isOpen())
 	{
@@ -21,11 +22,14 @@ void Engine::run() {
 		update(dt);	
 		while (window.pollEvent(event))
 		{
+			input.update(event);
 			if (event.type == sf::Event::Closed) {
 				window.close();
 			}
 		}
 
+		//std::cout << Input::myMouseButtons[sf::Mouse::Button::Left] << std::endl;
+		//Input::myMouseButtons[sf::Mouse::Button::Left] = false;
 		window.clear();
 		draw(window);
 		window.display();

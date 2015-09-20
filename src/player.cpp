@@ -24,8 +24,6 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 		}
 	}
 	if(groupSelected) {
-		//	std::cout << posMouseWindow.x << std::endl;
-		//	std::cout << actions[0]->getBox()->x << std::endl;
 		if(sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 			for(auto *act : actions) {
 				if(act->cursorIn(posMouseWindow)) {
@@ -35,6 +33,7 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 		}
 	}
 }
+
 
 void Player::sendActionsInterface(Interface *interface) {
 	actions = currentGroup->allowedAction();
