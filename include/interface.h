@@ -12,6 +12,7 @@ class Interface : public Screen{
 		void update(float dt);
 		void update(float dt, sf::View &view);
 		void sendInterfaceActions(std::vector<Action*> &actions);
+		void resetActionsStatusBar();
 		std::vector<Action*> getActions();
 		float getPositionBar();
 		~Interface();

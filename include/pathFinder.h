@@ -5,9 +5,10 @@
 #include "map.h"
 #include <vector>
 #include <math.h>
+
 typedef struct Node {
 	Point currentPos;
-	int weight;
+	float weight;
 }Node;
 
 class PathFinder {
@@ -15,10 +16,10 @@ class PathFinder {
 		PathFinder(Map *map);
 		PathFinder();
 		std::vector<Node> nearestCases();
-		float euclideanDistance();
+		float euclideanDistance(Point newDistance);
 
 		~PathFinder();
-		void setDestination(Point dest);
+		void setDestination(Point currentPos,Point dest);
 		
 	private:
 		Point destination;

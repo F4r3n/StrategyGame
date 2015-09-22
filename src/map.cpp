@@ -36,6 +36,11 @@ Map::Map(const std::string &path) {
 
 }
 
+bool Map::validPoint(Point &pos) {
+	if(pos.x < 0 || pos.x >= widthMap || pos.y < 0 || pos.y >= heightMap) return false;
+	return true;
+}
+
 void Map::draw(sf::RenderWindow &window) {
 	for(auto tile : *tiles) {
 		window.draw(*tile);

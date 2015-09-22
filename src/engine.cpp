@@ -28,8 +28,6 @@ void Engine::run() {
 			}
 		}
 
-		//std::cout << Input::myMouseButtons[sf::Mouse::Button::Left] << std::endl;
-		//Input::myMouseButtons[sf::Mouse::Button::Left] = false;
 		window.clear();
 		draw(window);
 		window.display();

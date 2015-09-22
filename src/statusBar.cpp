@@ -35,6 +35,12 @@ void StatusBar::setPortrait(Portrait *por) {
 std::vector<Action*> StatusBar::getActions() {
 	return actions;
 }
+
+void StatusBar::resetActions() {
+	actions.clear();	
+}
+
+
 void StatusBar::setActions(std::vector<Action*> &actions) {
 	int i=0;
 	for(Action *act : actions) {

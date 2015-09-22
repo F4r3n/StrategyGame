@@ -12,20 +12,20 @@ class ClickableObject {
 		ClickableObject(int belonging);
 		virtual void draw(sf::RenderWindow &window);
 		virtual void update(float dt, Point posMouse, StatusBar *statusBar);
-		bool isSelected(Point posMouse);
+		virtual bool isSelected(Point posMouse);
 		std::vector<Action*> getActions();
 		int getId();
 		void deselect();
 		virtual ~ClickableObject();
-
+		int getBelonging();
 	protected:
+		Box *box;
 		int belonging;
 		bool selected;
-		sf::RectangleShape *shape;
 		Point casePosition;
-		Box *box;
 		std::vector<Action*> actions;
-		static int id;
+		static int idTemp;
+		int id;
 
 };
 

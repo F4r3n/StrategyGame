@@ -21,6 +21,10 @@ std::vector<Action*> Interface::getActions() {
 	return statusBar->getActions();
 }
 
+void Interface::resetActionsStatusBar() {
+	statusBar->resetActions();
+}
+
 void Interface::update(float dt, sf::View &view) {
 	border->update(dt, view);
 	

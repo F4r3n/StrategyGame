@@ -14,13 +14,21 @@ Group::Group(std::vector<Unit*> *listUnits) {
 	}
 }
 
-Group::Group(Unit *unit) {
+
+void Group::setDestination(Point pos) {
+	for(auto &m : *units) {
+		m.second->setDestination(pos);
+	}
+}
+
+Group::Group(Unit *unit, Map *map) {
 
 	idGroup++;
 	units = new std::map<int,Unit*>();
-
+	unit->initPathFinder(map);
 	units->insert(std::pair<int, Unit*>(unit->getId(), unit));
 	unit->idGroup = idGroup;
+	unit->runningAction = true;
 	for(Action *act :unit->getActions()) {
 		moves[act->getAct()] = act;
 	}

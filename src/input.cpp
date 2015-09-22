@@ -15,6 +15,12 @@ Input::~Input() {
 
 }
 
+bool Input::isMousePressed(sf::Mouse::Button button, bool repeat) {
+	bool val = Input::myMouseButtons[button];
+	if(!repeat) Input::myMouseButtons[button] = false;
+	return val;
+}
+
 
 void Input::update(sf::Event &event) {
 	switch (event.type)

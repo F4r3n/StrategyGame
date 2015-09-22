@@ -18,6 +18,7 @@ class StatusBar : public Screen {
 		std::vector<Action*> getActions();
 		void setPortrait(Portrait *por);
 		void setActions(std::vector<Action*> &actions);
+		void resetActions();
 	private:
 		float position;
 		sf::Color color;

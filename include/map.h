@@ -17,6 +17,7 @@ class Map {
 		Point getSizeMap();
 		Point getSizeTile();
 		Point getPos(Point pos);
+		bool validPoint(Point &pos);
 		~Map();
 	
 	private:

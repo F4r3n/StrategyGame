@@ -1,21 +1,25 @@
 #include "clickableObject.h"
 #include "engineConst.h"
+#include <iostream>
 
+int ClickableObject::idTemp = 0; 
 
-int ClickableObject::id = 0; 
 ClickableObject::ClickableObject(int belonging): belonging(belonging){
-	shape = new sf::RectangleShape();
-	shape->setSize(sf::Vector2f(50, 50));
-	shape->setPosition(20, EngineConst::WIDTH*0.7);
-	shape->setFillColor(sf::Color::White);
-	id++;
+	std::cout << "create unit " << ClickableObject::idTemp << std::endl;
+	ClickableObject::idTemp++;
+	id = idTemp;
 	
+	std::cout << "unit created " << id << std::endl;
 }
 
 ClickableObject::ClickableObject() {}
 
 void ClickableObject::update(float dt, Point posMouse, StatusBar *statusBar) {
 
+}
+
+int ClickableObject::getBelonging() {
+	return belonging;
 }
 
 int ClickableObject::getId() {
