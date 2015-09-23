@@ -21,6 +21,7 @@ void Group::setDestination(Point pos) {
 	}
 }
 
+
 Group::Group(Unit *unit, Map *map) {
 
 	idGroup++;

@@ -16,7 +16,7 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 	if(Input::isMousePressed(sf::Mouse::Right, false)) {
 		if(groupSelected) {
 			currentGroup->setDestination(map->getPos(pos));
-			std::cout << "yo" << std::endl;
+		//	currentGroup->setDestination(Point(25,20));
 		}
 	}
 

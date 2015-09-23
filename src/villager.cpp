@@ -6,6 +6,7 @@ Villager::Villager() {
 }
 
 Villager::~Villager(){
+	//delete pathFinder;
 	delete shape;
 	delete box;
 }

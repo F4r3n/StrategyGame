@@ -40,5 +40,4 @@ void Unit::update(float dt, Point posMouse, Map *map) {
 }
 
 Unit::~Unit() {
-
 }

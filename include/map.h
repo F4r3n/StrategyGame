@@ -6,6 +6,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "point.h"
+#include <memory>
 
 class Map {
 	public:
@@ -18,12 +19,15 @@ class Map {
 		Point getSizeTile();
 		Point getPos(Point pos);
 		bool validPoint(Point &pos);
+		void setColorTile(Point pos);
+		void reset();
 		~Map();
 	
 	private:
 		int widthMap, heightMap;
 		int widthTile, heightTile;
-		std::vector<sf::RectangleShape*> *tiles;	
+		std::vector<std::shared_ptr<sf::RectangleShape> > *tiles;	
+		std::vector<std::shared_ptr<sf::RectangleShape> > *tilesTemp;	
 		
 };
 
