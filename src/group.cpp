@@ -1,16 +1,17 @@
 #include "group.h"
 #include <iostream>
 
-int Group::idGroup = 0;
+int Group::idGroupTemp = 0;
 
 Group::Group(std::vector<Unit*> *listUnits) {
 	
-	idGroup++;
+	idGroupTemp++;
+	idGroup = idGroupTemp;
 	units = new std::map<int,Unit*>();
 	for(auto *unit : *listUnits) {
 
 	units->insert(std::pair<int, Unit*>(unit->getId(), unit));
-	unit->idGroup = idGroup;
+	unit->setIdGroup(idGroup);
 	}
 }
 
@@ -24,15 +25,20 @@ void Group::setDestination(Point pos) {
 
 Group::Group(Unit *unit, Map *map) {
 
-	idGroup++;
+	idGroupTemp++;
+	idGroup = idGroupTemp;
 	units = new std::map<int,Unit*>();
 	unit->initPathFinder(map);
 	units->insert(std::pair<int, Unit*>(unit->getId(), unit));
-	unit->idGroup = idGroup;
+	unit->setIdGroup(idGroup);
 	unit->runningAction = true;
 	for(Action *act :unit->getActions()) {
 		moves[act->getAct()] = act;
 	}
+}
+
+int Group::getIdGroup() {
+	return idGroup;
 }
 
 Group::Group() {
@@ -53,7 +59,7 @@ bool Group::isExist(int id) {
 void Group::refreshGroup() {
 
 	for(auto &m : *units) {
-		if(m.second->idGroup != idGroup) {
+		if(m.second->getIdGroup() != idGroup) {
 			units->erase(m.first);
 		}
 	}
@@ -61,7 +67,7 @@ void Group::refreshGroup() {
 
 void Group::addUnit(Unit *unit) {
 	units->insert(std::pair<int, Unit*>(unit->getId(), unit));
-	unit->idGroup = idGroup;
+	unit->setIdGroup(idGroup);
 }
 
 std::vector<Action*> Group::allowedAction() {

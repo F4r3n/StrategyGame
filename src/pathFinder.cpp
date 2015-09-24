@@ -102,15 +102,22 @@ void PathFinder::setDestination(Point currentPos,Point dest) {
 	}
 }
 
+std::vector<Point>* PathFinder::getPoints() {
+	return &points;
+}
+
 void PathFinder::retrievePath(Node *lastNode) {
 	Node *currentNode = lastNode;
+	points.clear();
 	points.push_back(currentNode->currentPos);
 	map->setColorTile(currentNode->currentPos);
 	while(currentNode->currentPos != currentPosition) {
 			currentNode = currentNode->parent;
+			if(!(currentNode->currentPos != currentPosition)) break;
 			points.push_back(currentNode->currentPos);
 			map->setColorTile(currentNode->currentPos);
 	}
+	std::reverse(points.begin(), points.end());
 
 }
 

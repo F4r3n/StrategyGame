@@ -27,7 +27,7 @@ Villager::Villager(int belonging, Point pos, int life, float attack): Unit(belon
 
 void Villager::draw(sf::RenderWindow &window) {
 	window.draw(*shape);
-	window.draw(*box->getShape());
+//	window.draw(*box->getShape());
 
 }
 
@@ -40,5 +40,6 @@ bool Villager::isSelected(Point posMouse) {
 }
 void Villager::update(float dt, Point posMouse, Map *map) {
 	Unit::update(dt,posMouse,map);
+	shape->setPosition(box->x, box->y);
 	//if(box == 0) std::cout << "null" << std::endl;
 }

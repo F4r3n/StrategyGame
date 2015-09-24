@@ -6,6 +6,7 @@ class Point {
 		Point();
 		Point(int x, int y);
 		bool operator!=(const Point &a);
+		bool operator==(const Point &a);
 		~Point();
 		int x;
 		int y;

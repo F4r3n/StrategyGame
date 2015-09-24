@@ -17,8 +17,10 @@ class Group {
 		std::vector<Action*> allowedAction();
 		void initPathFinder(Map *map);
 		void setDestination(Point pos);
+		int getIdGroup();
 	private:
-		static int idGroup;
+		static int idGroupTemp;
+		int idGroup;
 		std::map<int,Unit*> *units;
 		std::map<Move,Action*> moves;
 		bool isMixed = false;

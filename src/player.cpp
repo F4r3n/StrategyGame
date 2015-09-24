@@ -14,16 +14,16 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 	}
 
 	if(Input::isMousePressed(sf::Mouse::Right, false)) {
-		if(groupSelected) {
+		std::cout << "group " << groupSelected << std::endl;
+		if(groupSelected && currentGroup != nullptr) {
 			currentGroup->setDestination(map->getPos(pos));
 		//	currentGroup->setDestination(Point(25,20));
 		}
 	}
 
-		if(Input::isMousePressed(sf::Mouse::Left, false)) {
-	for(auto *unit : *units) {
+	if(Input::isMousePressed(sf::Mouse::Left, false)) {
+		for(auto *unit : *units) {
 			if(unit->isSelected(pos)) {
-				std::cout << unit->getId() << " " << unit->idGroup <<" " <<unit->getBelonging() <<  std::endl;
 				if(!unit->isGrouped() && unit->getBelonging() == 0) {
 					unit->setGroup(true);
 					Group *gr = new Group(unit, map);
@@ -35,6 +35,20 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 				else if(unit->getBelonging() !=0) {
 					interface->resetActionsStatusBar();
 				}
+				else if(unit->isGrouped()) {
+					for(auto *gr : *groups) {
+						if(gr->getIdGroup() == unit->getIdGroup()) {
+							currentGroup = gr;
+							groupSelected = true;
+							break;
+						}
+					}
+				}
+				break;
+			} else {
+				map->reset();
+				groupSelected = false;
+				currentGroup = nullptr;
 			}
 		}
 	}
@@ -48,8 +62,6 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 			}
 		}
 	}
-	//	std::cout << Input::myMouseButtons[sf::Mouse::Button::Left] << std::endl;
-	//	Input::myMouseButtons[sf::Mouse::Button::Left] = false;
 }
 
 

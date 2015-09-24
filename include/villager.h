@@ -15,10 +15,9 @@ class Villager : public Unit {
 		void draw(sf::RenderWindow &window);
 		void update(float dt, Point posMouse, Map *map);
 	private:
+		sf::CircleShape *shape;
 	//	Box *box;
 		float attack;
-		sf::CircleShape *shape;
-		sf::RectangleShape *bs;
 };
 
 #endif

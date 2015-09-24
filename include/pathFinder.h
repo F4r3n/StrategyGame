@@ -6,7 +6,7 @@
 #include <vector>
 #include <math.h>
 #include <queue>
-
+#include <algorithm>
 
 typedef struct Node {
 	Point currentPos;
@@ -34,6 +34,7 @@ class PathFinder {
 		void setDestination(Point currentPos,Point dest);
 		void retrievePath(Node *lastNode);
 		void reset();
+		std::vector<Point>* getPoints();
 
 	private:
 		Point destination;

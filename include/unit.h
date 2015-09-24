@@ -13,16 +13,25 @@ class Unit: public ClickableObject {
 		virtual bool isSelected(Point posMouse);
 		bool isGrouped();
 		void setGroup(bool val);
-		int idGroup = -1;
+		int getIdGroup();
+		void setIdGroup(int id);
 		int type = -1;
 		bool runningAction = false;
 		void initPathFinder(Map *map);
 		void setDestination(Point pos);
+
 	protected:
+		int idGroup = -1;
+		float speed = 1000;
+		float x = 0;
+		float y = 0;
 		Point currentPos;
 		Point arrivalPos;
+		std::vector<Point> *path;
+		Point nextPosition;
 		int life;
 		bool hasGroup = false;
+		bool hasDestination = false;
 		PathFinder *pathFinder;
 
 
