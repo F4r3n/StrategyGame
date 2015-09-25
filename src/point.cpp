@@ -12,6 +12,13 @@ bool Point::operator!=(const Point &p) {
 bool Point::operator==(const Point &p) {
 	return (p.x == x && p.y==y);
 }
+
+Point& Point::operator=(const Point &p) {
+	x = p.x;
+	y = p.y;
+	return *this;
+}
+
 Point::~Point() {
 
 }

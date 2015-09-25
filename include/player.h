@@ -26,7 +26,11 @@ class Player {
 		Action *selectedAction;
 		std::vector<Action*> actions;
 		bool groupSelected = false;
+		bool isSelecting = false;
 		Point mousePosWindow;
+		Point posStartRect;
+		std::unique_ptr<sf::RectangleShape> shape;
+		Point posEndRect;
 
 
 };

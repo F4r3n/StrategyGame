@@ -8,7 +8,8 @@ class Input {
 		Input();
 		~Input();
 		void update(sf::Event &event);
-		static bool isMousePressed(sf::Mouse::Button button, bool repeat);
+		static bool isMousePressed(sf::Mouse::Button button);
+		static std::map<std::string, bool> actionsClick;
 	private:
 		static float myMouseX;
 		static float myMouseY;

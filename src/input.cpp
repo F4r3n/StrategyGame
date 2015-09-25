@@ -2,6 +2,7 @@
 #include <iostream>
 
 std::map<sf::Mouse::Button, bool> Input::myMouseButtons;
+std::map<std::string, bool> Input::actionsClick;
 std::map<sf::Keyboard::Key, bool> Input::myKeys;
 float Input::myMouseX;
 float Input::myMouseY;
@@ -15,10 +16,10 @@ Input::~Input() {
 
 }
 
-bool Input::isMousePressed(sf::Mouse::Button button, bool repeat) {
-	bool val = Input::myMouseButtons[button];
-	if(!repeat) Input::myMouseButtons[button] = false;
-	return val;
+
+bool Input::isMousePressed(sf::Mouse::Button button) {
+	return Input::myMouseButtons[button];
+//	if(!repeat) Input::myMouseButtons[button] = false;
 }
 
 
@@ -31,7 +32,8 @@ void Input::update(sf::Event &event) {
 
 									  // Mouse event
 		case sf::Event::EventType::MouseButtonPressed :  Input::myMouseButtons[event.mouseButton.button] = true;  break;
-		case sf::Event::EventType::MouseButtonReleased : Input::myMouseButtons[event.mouseButton.button] = false; break;
+		case sf::Event::EventType::MouseButtonReleased : 
+														 Input::myMouseButtons[event.mouseButton.button] = false; break;
 
 														 // Mouse move event
 		case sf::Event::MouseMoved :

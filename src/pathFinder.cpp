@@ -17,7 +17,7 @@ std::vector<Node*> PathFinder::nearestCases(Node *nextPosition, float offset) {
 	std::vector<Node*> nodes;
 	for(int i=-1; i< 2;i++) {
 		for(int j=-1; j<2;j++) {
-			if(abs(i) == abs(j)) continue;
+		//	if(abs(i) == abs(j)) continue;
 			Point pos(nextPosition->currentPos.x + i, nextPosition->currentPos.y + j);
 			if(map->validPoint(pos) && bmap[pos.x][pos.y]) {
 				Node *n = new Node();

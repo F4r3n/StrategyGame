@@ -6,6 +6,7 @@
 #include "portrait.h"
 #include <vector>
 #include "action.h"
+#include <memory>
 
 class StatusBar : public Screen {
 	public:
@@ -23,7 +24,7 @@ class StatusBar : public Screen {
 		float position;
 		sf::Color color;
 		Portrait *por;
-		sf::RectangleShape *shape;
+		std::unique_ptr<sf::RectangleShape> shape;
 		std::vector<Action*> actions;
 		
 

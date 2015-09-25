@@ -2,7 +2,7 @@
 #include "engineConst.h"
 
 StatusBar::StatusBar(float position, sf::Color color): position(position), color(color) {
-	shape = new sf::RectangleShape();
+	shape = std::unique_ptr<sf::RectangleShape>(new sf::RectangleShape());
 	shape->setSize(sf::Vector2f(EngineConst::WIDTH, EngineConst::HEIGHT/5));
 	shape->setPosition(0, EngineConst::HEIGHT*position);
 	shape->setFillColor(color);
@@ -51,10 +51,6 @@ void StatusBar::setActions(std::vector<Action*> &actions) {
 }
 
 StatusBar::~StatusBar() {
-	delete shape;
-
-	for(auto *action : actions)
-		delete action;
 
 
 }
