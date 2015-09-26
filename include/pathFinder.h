@@ -29,6 +29,7 @@ class PathFinder {
 		PathFinder();
 		std::vector<Node*> nearestCases(Node *nextPosition, float offset);
 		float euclideanDistance(Point point);
+		float chebyshevDistance(Point newDistance);
 		void fillNodes(std::priority_queue<Node*, std::vector<Node*>,Comparator> &nodes, std::vector<Node*> &vnode);
 		~PathFinder();
 		void setDestination(Point currentPos,Point dest);

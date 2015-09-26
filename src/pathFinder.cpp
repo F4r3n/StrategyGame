@@ -41,6 +41,12 @@ float PathFinder::euclideanDistance(Point newDistance) {
 //	return sqrt(pow((newDistance.x-destination.x),2) + pow((newDistance.y - destination.x),2));
 }
 
+float PathFinder::chebyshevDistance(Point newDistance) {
+	float a = abs(newDistance.x - destination.x);
+	float b = abs(newDistance.y - destination.y);
+	return std::max(a,b);
+}
+
 PathFinder::PathFinder() {
 
 }

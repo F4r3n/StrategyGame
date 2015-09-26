@@ -44,7 +44,21 @@ Point Map::getSizeTile() {
 }
 
 Map::Map(const std::string &path) {
-
+	int p;
+	std::ifstream fin(path, std::ifstream::in);
+	fin >> widthMap >> heightMap >> widthTile >> heightTile;
+	
+	tiles = new std::vector<std::shared_ptr<Case> >();
+	int i = 0;
+	int j = 0;
+	while (fin >> p) {
+		std::shared_ptr<Case> rect (new Case(new BuildGround(Point(i*widthTile, j*heightTile), Point(widthTile, heightTile))));
+		i++;
+		if(i%widthMap == 0) j++;
+		tiles->push_back(rect);
+		std::cout << p;
+	}
+	fin.close();
 
 }
 
