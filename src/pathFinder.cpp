@@ -20,6 +20,7 @@ std::vector<Node*> PathFinder::nearestCases(Node *nextPosition, float offset) {
 		//	if(abs(i) == abs(j)) continue;
 			Point pos(nextPosition->currentPos.x + i, nextPosition->currentPos.y + j);
 			if(map->validPoint(pos) && bmap[pos.x][pos.y]) {
+				map->setColorTile(pos, sf::Color(100,0,0));
 				Node *n = new Node();
 				n->currentPos = pos;
 				n->weight = euclideanDistance(pos) + offset;
@@ -110,12 +111,12 @@ void PathFinder::retrievePath(Node *lastNode) {
 	Node *currentNode = lastNode;
 	points.clear();
 	points.push_back(currentNode->currentPos);
-	map->setColorTile(currentNode->currentPos);
+	map->setColorTile(currentNode->currentPos, sf::Color::Red);
 	while(currentNode->currentPos != currentPosition) {
 			currentNode = currentNode->parent;
 			if(!(currentNode->currentPos != currentPosition)) break;
 			points.push_back(currentNode->currentPos);
-			map->setColorTile(currentNode->currentPos);
+			map->setColorTile(currentNode->currentPos, sf::Color::Red);
 	}
 	std::reverse(points.begin(), points.end());
 

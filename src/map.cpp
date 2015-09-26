@@ -4,14 +4,12 @@
 Map::Map() {}
 
 Map::Map(int w, int h, int wt, int ht): widthMap(w), heightMap(h), widthTile(wt), heightTile(ht) {
-	tiles = new std::vector<std::shared_ptr<sf::RectangleShape> >();
+	tiles = new std::vector<std::shared_ptr<Case> >();
 	int size = w*h;
 	for(int i=0;i<w;i++) {
 		for(int j=0;j<h;j++) {
 
-		std::shared_ptr<sf::RectangleShape> rect (new sf::RectangleShape(sf::Vector2f(wt,ht)));
-		rect->setPosition(i*wt, j*ht);
-		rect->setFillColor(sf::Color(100,200,50));
+		std::shared_ptr<Case> rect (new Case(new BuildGround(Point(i*wt, j*ht), Point(wt, ht))));
 		tiles->push_back(rect);
 		}
 	}
@@ -50,9 +48,9 @@ Map::Map(const std::string &path) {
 
 }
 
-void Map::setColorTile(Point pos) {
+void Map::setColorTile(Point pos, sf::Color color) {
 	std::shared_ptr<sf::RectangleShape> rect = tilesTemp->at(pos.x*widthMap + pos.y);
-	rect->setFillColor(sf::Color::Red);
+	rect->setFillColor(color);
 }
 
 bool Map::validPoint(Point &pos) {
@@ -62,7 +60,7 @@ bool Map::validPoint(Point &pos) {
 
 void Map::draw(sf::RenderWindow &window) {
 	for(auto tile : *tiles) {
-		window.draw(*tile);
+		tile->draw(window);
 	}
 	for(auto tile : *tilesTemp) {
 		window.draw(*tile);

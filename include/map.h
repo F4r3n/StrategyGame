@@ -7,6 +7,8 @@
 #include <SFML/Graphics.hpp>
 #include "point.h"
 #include <memory>
+#include "case.h"
+#include "buildGround.h"
 
 class Map {
 	public:
@@ -19,14 +21,14 @@ class Map {
 		Point getSizeTile();
 		Point getPos(Point pos);
 		bool validPoint(Point &pos);
-		void setColorTile(Point pos);
+		void setColorTile(Point pos, sf::Color color);
 		void reset();
 		~Map();
 	
 	private:
 		int widthMap, heightMap;
 		int widthTile, heightTile;
-		std::vector<std::shared_ptr<sf::RectangleShape> > *tiles;	
+		std::vector<std::shared_ptr<Case> > *tiles;	
 		std::vector<std::shared_ptr<sf::RectangleShape> > *tilesTemp;	
 		
 };
