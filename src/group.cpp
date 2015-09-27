@@ -16,9 +16,9 @@ Group::Group(std::vector<Unit*> *listUnits) {
 }
 
 
-void Group::setDestination(Point pos) {
+void Group::setDestination(Point arrivalCasePos, Point arrivalPos) {
 	for(auto &m : *units) {
-		m.second->setDestination(pos);
+		m.second->setDestination(arrivalCasePos, arrivalPos);
 	}
 }
 

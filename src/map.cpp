@@ -20,7 +20,7 @@ Map::Map(int w, int h, int wt, int ht): widthMap(w), heightMap(h), widthTile(wt)
 
 		std::shared_ptr<sf::RectangleShape> rect (new sf::RectangleShape(sf::Vector2f(wt,ht)));
 		rect->setPosition(i*wt, j*ht);
-		rect->setFillColor(sf::Color(100,200,50));
+		rect->setFillColor(sf::Color(0,0,0,0));
 		tilesTemp->push_back(rect);
 		}
 	}
@@ -28,6 +28,10 @@ Map::Map(int w, int h, int wt, int ht): widthMap(w), heightMap(h), widthTile(wt)
 
 Point Map::getPos(Point pos) {
 	return Point(pos.x/widthTile, pos.y/heightTile);
+}
+
+Point Map::getCenter(Point pos) {
+	return Point(pos.x+widthTile/2, pos.y+heightTile/2);
 }
 
 Point Map::getSizeMap() {
@@ -44,22 +48,44 @@ Point Map::getSizeTile() {
 }
 
 Map::Map(const std::string &path) {
-	int p;
+	char c;
 	std::ifstream fin(path, std::ifstream::in);
 	fin >> widthMap >> heightMap >> widthTile >> heightTile;
-	
 	tiles = new std::vector<std::shared_ptr<Case> >();
 	int i = 0;
 	int j = 0;
-	while (fin >> p) {
-		std::shared_ptr<Case> rect (new Case(new BuildGround(Point(i*widthTile, j*heightTile), Point(widthTile, heightTile))));
+	while (fin >> c) {
+		int p = c -'0';
+		Case *ca;
+		switch(p){
+			case 1:
+			ca = new Case(new BuildGround(Point(i*widthTile, j*heightTile), Point(widthTile, heightTile)));
+			break;
+			case 2:
+			ca = new Case(new ObstacleGround(Point(i*widthTile, j*heightTile), Point(widthTile, heightTile)));
+			break;
+		}
+
+		std::shared_ptr<Case> rect (ca);
 		i++;
-		if(i%widthMap == 0) j++;
+		if(i%widthMap == 0) {
+			j++;
+			i = 0;
+		}
 		tiles->push_back(rect);
-		std::cout << p;
 	}
 	fin.close();
 
+	tilesTemp = new std::vector<std::shared_ptr<sf::RectangleShape> >();
+	for(i=0;i<widthMap;i++) {
+		for(j=0;j<heightMap;j++) {
+
+		std::shared_ptr<sf::RectangleShape> rect (new sf::RectangleShape(sf::Vector2f(widthTile,heightTile)));
+		rect->setPosition(i*widthTile, j*heightTile);
+		rect->setFillColor(sf::Color(0,0,0,0));
+		tilesTemp->push_back(rect);
+		}
+	}
 }
 
 void Map::setColorTile(Point pos, sf::Color color) {

@@ -35,7 +35,7 @@ void UIBorder::update(float dt, sf::View &view) {
 	centerView = view.getCenter();
 	
 	if(borders[0]->cursorIn(mousePos.x, mousePos.y)) {
-		if(EngineConst::HEIGHT/2- centerView.y >0)
+		if(-EngineConst::HEIGHT/2+ centerView.y >0)
 			view.move(0,-speed*dt);
 	}
 
@@ -47,14 +47,13 @@ void UIBorder::update(float dt, sf::View &view) {
 
 
 	if(borders[2]->cursorIn(mousePos.x, mousePos.y)) {
-
 		view.move(0,speed*dt);
 	}
 
 
 	if(borders[3]->cursorIn(mousePos.x, mousePos.y)) {
 
-		if(EngineConst::WIDTH/2 - centerView.x >0)
+		if(-EngineConst::WIDTH/2 + centerView.x >0)
 		view.move(-speed*dt,0);
 	}
 }

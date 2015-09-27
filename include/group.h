@@ -16,7 +16,7 @@ class Group {
 		void refreshGroup();
 		std::vector<Action*> allowedAction();
 		void initPathFinder(Map *map);
-		void setDestination(Point pos);
+		void setDestination(Point arrivalCasePos, Point arrivalPos);
 		int getIdGroup();
 	private:
 		static int idGroupTemp;

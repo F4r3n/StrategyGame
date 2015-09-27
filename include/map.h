@@ -10,6 +10,7 @@
 #include <memory>
 #include "case.h"
 #include "buildGround.h"
+#include "obstacleGround.h"
 
 class Map {
 	public:
@@ -23,6 +24,7 @@ class Map {
 		Point getPos(Point pos);
 		bool validPoint(Point &pos);
 		void setColorTile(Point pos, sf::Color color);
+		Point getCenter(Point pos);
 		void reset();
 		~Map();
 	

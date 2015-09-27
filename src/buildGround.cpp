@@ -5,6 +5,8 @@ BuildGround::BuildGround(Point pos, Point size): Ground(pos,size) {
 	shape->setSize(sf::Vector2f(size.x, size.y));
 	shape->setPosition(pos.x, pos.y);
 	shape->setFillColor(sf::Color(100,200,50));
+	shape->setOutlineThickness(5);
+	shape->setOutlineColor(sf::Color::Black);
 }
 
 BuildGround::~BuildGround() {

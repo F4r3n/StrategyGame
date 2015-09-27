@@ -18,14 +18,15 @@ class Unit: public ClickableObject {
 		int type = -1;
 		bool runningAction = false;
 		void initPathFinder(Map *map);
-		void setDestination(Point pos);
+		void setDestination(Point casePosArrival, Point posArrival);
 
 	protected:
 		int idGroup = -1;
-		float speed = 1000;
+		Point speed;
 		float x = 0;
 		float y = 0;
 		Point currentPos;
+		Point arrivalCasePos;
 		Point arrivalPos;
 		std::vector<Point> *path;
 		Point nextPosition;
