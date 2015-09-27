@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include "ground.h"
-#include "point.h"
+#include "box.h"
 
 class Case {
 	public:
@@ -15,9 +15,8 @@ class Case {
 		void update(float dt);
 	private:
 		bool isReachable = true;
-		Point pos;
-		Point size;
 		std::unique_ptr<Ground> ground;
+		std::unique_ptr<Box> box;
 };
 
 #endif
