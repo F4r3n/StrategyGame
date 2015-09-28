@@ -37,7 +37,12 @@ void Unit::initPathFinder(Map *map) {
 
 void Unit::setDestination(Point casePosArrival, Point posArrival) {
 	arrivalPos = posArrival;
+//	Point p(30,30);
+//	std::cout << arrivalCasePos << std::endl;
 	arrivalCasePos = casePosArrival;
+	
+//	std::cout << "dest " <<arrivalPos << std::endl;
+
 	if(casePosition == casePosArrival) return;
 	pathFinder->setDestination(casePosition,casePosArrival);
 	path = pathFinder->getPoints();
@@ -53,11 +58,12 @@ void Unit::setGroup(bool val) {
 
 void Unit::update(float dt, Point posMouse, Map *map) {
 	casePosition = map->getPos(currentPos);
-	
+//	std::cout << currentPos << std::endl;	
 	if(hasDestination) {
 		bool precised = false;
 		Point tempSpeed = speed;
 
+//	std::cout << casePosition <<" " << arrivalCasePos << std::endl;	
 		float dx;
 		float dy;
 		if(casePosition == arrivalCasePos) {
@@ -69,7 +75,7 @@ void Unit::update(float dt, Point posMouse, Map *map) {
 				float dtempy = -currentPos.y +arrivalPos.y;
 				dx = (dtempx)/norme;
 				dy = (dtempy)/norme;
-			//	std::cout << dtempx << " " << dtempy << std::endl;
+		//		std::cout << dtempx << " " << dtempy << std::endl;
 //TODO a normaliser en fonction de la vitesse
 				if((abs(dtempx) == 0 || abs(dtempx) <=3) && (abs(dtempy) ==0 || abs(dtempy)<=3)) {
 					hasDestination = false;
@@ -108,8 +114,8 @@ void Unit::update(float dt, Point posMouse, Map *map) {
 		y += tempSpeed.y*dt*dy;
 		box->x = x;
 		box->y = y;
-		currentPos.x = box->x;
-		currentPos.y = box->y;
+		currentPos.x = box->x+offsetDraw.x;
+		currentPos.y = box->y+offsetDraw.y;
 		//	box->x = currentPos.x;
 		//	box->y = currentPos.y;
 	}

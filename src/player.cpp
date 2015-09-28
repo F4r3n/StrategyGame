@@ -55,7 +55,7 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 
 	if(Input::isMousePressed(sf::Mouse::Right) && Input::actionsClick["selectDestination"]) {
 		Input::actionsClick["selectDestination"] = false;
-		if(groupSelected && currentGroup != nullptr) {
+		if(groupSelected && currentGroup != nullptr && map->isWalkable(map->getPos(pos))) {
 			currentGroup->setDestination(map->getPos(pos), pos);
 		}
 	}
@@ -86,6 +86,7 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 				}
 				break;
 			} else {
+				interface->resetActionsStatusBar();
 				map->reset();
 				groupSelected = false;
 				currentGroup = nullptr;

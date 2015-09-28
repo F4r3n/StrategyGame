@@ -6,12 +6,15 @@ Case::Case(Ground *gr){
 	box = std::unique_ptr<Box>(new Box(gr->getPos(), gr->getSize()));
 }
 
+bool Case::isWalkable() {
+	return ground->isWalkable();
+}
+
 void Case::draw(sf::RenderWindow &window) {
 	sf::Vector2f s(window.getView().getSize());
 	sf::Vector2f p(window.getView().getCenter());
-	Box b = Box(Point(p,-400,-300), Point(s));
 //	std::cout << b.x << " " << b.y << " " << b.w << " " << b.h << std::endl;
-	if(box->AABB(&b))
+	if(box->AABB(Point(p,-400,-300),Point(s)))
 		ground->draw(window);
 }
 

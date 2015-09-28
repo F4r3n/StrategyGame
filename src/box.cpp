@@ -19,6 +19,11 @@ Box::Box(Point pos, Point size) {
 	shape->setFillColor(sf::Color::Black);
 }
 
+void Box::updateOffset(Point offset, Point current) {
+	int ax = current.x - offset.x;
+	int ay = current.y - offset.y;	
+}
+
 sf::RectangleShape* Box::getShape() {
 	return shape;
 }
@@ -39,6 +44,19 @@ void Box::configure(Point size, Point pos, sf::Color color) {
 	h = size.y;
 
 }
+
+bool Box::AABB(Point pos, Point size) {
+
+	if((pos.x >= x + w)      // trop à droite
+			  || (pos.x + size.x <= x) // trop à gauche
+			  || (pos.y >= y + h) // trop en bas
+			  || (pos.y + size.y <= y))  // trop en haut
+		return false; 
+	else
+		return true; 
+}
+
+
 Box::~Box() {
 	delete shape;
 }

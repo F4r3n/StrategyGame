@@ -13,6 +13,7 @@ class Case {
 		~Case();
 		void draw(sf::RenderWindow &window);
 		void update(float dt);
+		bool isWalkable();
 	private:
 		bool isReachable = true;
 		std::unique_ptr<Ground> ground;

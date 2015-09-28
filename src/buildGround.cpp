@@ -7,11 +7,13 @@ BuildGround::BuildGround(Point pos, Point size): Ground(pos,size) {
 	shape->setFillColor(sf::Color(100,200,50));
 	shape->setOutlineThickness(5);
 	shape->setOutlineColor(sf::Color::Black);
+	walkable = true;
 }
 
 BuildGround::~BuildGround() {
 
 }
+
 
 void BuildGround::draw(sf::RenderWindow &window) {
 	window.draw(*shape);

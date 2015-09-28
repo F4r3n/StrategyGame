@@ -25,6 +25,7 @@ class Map {
 		bool validPoint(Point &pos);
 		void setColorTile(Point pos, sf::Color color);
 		Point getCenter(Point pos);
+		bool isWalkable(Point pos);
 		void reset();
 		~Map();
 	

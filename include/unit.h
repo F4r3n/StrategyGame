@@ -34,6 +34,7 @@ class Unit: public ClickableObject {
 		bool hasGroup = false;
 		bool hasDestination = false;
 		PathFinder *pathFinder;
+		Point offsetDraw;
 
 
 };

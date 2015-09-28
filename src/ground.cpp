@@ -1,5 +1,5 @@
 #include "ground.h"
-
+#include <iostream>
 Ground::Ground(Point pos, Point size): pos(pos), size(size) {
 
 }
@@ -19,6 +19,11 @@ Ground::~Ground() {
 
 void Ground::draw(sf::RenderWindow &window) {
 
+}
+
+bool Ground::isWalkable() {
+//	std::cout << walkable << std::endl;	
+	return walkable;
 }
 
 void Ground::update(float dt) {

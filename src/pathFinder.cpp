@@ -19,7 +19,7 @@ std::vector<Node*> PathFinder::nearestCases(Node *nextPosition, float offset) {
 		for(int j=-1; j<2;j++) {
 		//	if(abs(i) == abs(j)) continue;
 			Point pos(nextPosition->currentPos.x + i, nextPosition->currentPos.y + j);
-			if(map->validPoint(pos) && bmap[pos.x][pos.y]) {
+			if(map->validPoint(pos) && bmap[pos.x][pos.y] && map->isWalkable(pos)) {
 				map->setColorTile(pos, sf::Color(100,0,0));
 				Node *n = new Node();
 				n->currentPos = pos;

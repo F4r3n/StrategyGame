@@ -12,10 +12,12 @@ class Ground{
 	 	virtual ~Ground();
 		virtual void draw(sf::RenderWindow &window);
 		virtual void update(float dt);
+		bool isWalkable();
 
 	protected:
 		Point pos;
 		Point size;
+		bool walkable;
 
 };
 

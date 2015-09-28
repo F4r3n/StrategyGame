@@ -17,7 +17,9 @@ class Box {
 		bool AABB(Box *b);
 		bool AABB(Box &b);
 		bool pointer(float x, float y);
+		bool AABB(Point pos, Point size);
 		bool pointer(Point pos);
+		void updateOffset(Point offset, Point current);
 		sf::RectangleShape* getShape();
 		float x,w,y,h;
 	private:
