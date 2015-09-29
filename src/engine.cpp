@@ -2,7 +2,7 @@
 #include "input.h"
 
 Engine::Engine() {
-	
+
 }
 
 void Engine::run() {
@@ -11,25 +11,36 @@ void Engine::run() {
 	sf::Clock clock;
 	init();
 	Input input;
-
+	float time = clock.getElapsedTime().asSeconds();
+	float accumulator = 0.0f;
+	//	window.setFramerateLimit(60);
 	while (window.isOpen())
 	{
+		float nTime = clock.getElapsedTime().asSeconds();
+		float frameTime = nTime - time;
+		time = nTime;
 
-		sf::Time frameTime = clock.restart();
+		//sf::Time frameTime = clock.restart();
 		sf::Event event;
+		accumulator += frameTime;
 
-		float dt = frameTime.asSeconds()/10.f;
-		update(dt);	
-		while (window.pollEvent(event))
-		{
-			input.update(event);
-			if (event.type == sf::Event::Closed) {
-				window.close();
+		while( accumulator > dt) {
+			update(dt);	
+			accumulator -=dt;
+			while (window.pollEvent(event))
+			{
+
+				input.update(event);
+				if (event.type == sf::Event::Closed) {
+					window.close();
+				}
 			}
 		}
 
 		window.clear();
 		draw(window);
+
+
 		window.display();
 	}
 }

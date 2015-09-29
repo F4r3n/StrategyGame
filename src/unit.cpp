@@ -10,8 +10,8 @@ Unit::Unit(int belonging, Point pos, int life):ClickableObject(belonging) {
 	x = pos.x;
 	y = pos.y;
 	path = new std::vector<Point>();
-	speed.x = 1000;
-	speed.y = 1000;
+	speed.x = 100;
+	speed.y = 100;
 
 }
 

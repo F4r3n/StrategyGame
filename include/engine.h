@@ -20,6 +20,7 @@ class Engine {
 
 	private:
 		bool running = false;
+		float dt = 1.0f/60.0f;
 		Screen *_screen;
 		Game *game;
 };

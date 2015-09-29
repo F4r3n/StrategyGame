@@ -58,6 +58,14 @@ bool Group::isExist(int id) {
 	return false;
 }
 
+void Group::resetColor() {
+
+	for(auto &m : *units) {
+		m.second->setSelected(false);
+		m.second->changeColor();
+	}
+}
+
 bool Group::refreshGroup() {
 
 	for(auto &m : *units) {
@@ -65,7 +73,7 @@ bool Group::refreshGroup() {
 			units->erase(m.first);
 		}
 	}
-	if(units->size() == 0) {
+	if(units->empty()) {
 		toDelete = true;
 		return true;
 	}

@@ -18,6 +18,9 @@ Player::Player() {
 	Input::actionsClick["selectDestination"] = true;
 }
 
+void Player::resetGroups() {
+}
+
 void Player::update(float dt, Map *map, Interface *interface, Point pos, Point posMouseWindow) {
 	for(auto *unit : *units) {
 		unit->update(dt, pos,map);
@@ -40,12 +43,18 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 		for(auto *unit : *units) {
 			if(unit->isSelected(r)) {
 				unit->setGroup(true);
+				unit->setSelected(true);
+				unit->changeColor();
 				unitGroup.push_back(unit);
 				s = true;
 				//			std::cout << "select" << std::endl;
 			}
 		}
 		if(s) {
+			if(currentGroup != nullptr){
+				currentGroup->resetColor();
+				interface->resetActionsStatusBar();
+			}
 			Group *gr = new Group(unitGroup,map);
 
 			groups->push_back(gr);
@@ -84,10 +93,18 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 
 	if(Input::isMousePressed(sf::Mouse::Left) && Input::actionsClick["selectGroup"]) {
 		Input::actionsClick["selectGroup"] = false;
+		if(currentGroup != nullptr) {
+			currentGroup->resetColor();
+
+			interface->resetActionsStatusBar();
+		}
 		for(auto *unit : *units) {
 			if(unit->isSelected(pos)) {
 				if(unit->getBelonging() == 0) {
+					//	if(currentGroup != nullptr) currentGroup->resetColor();
 					unit->setGroup(true);
+					unit->setSelected(true);
+					unit->changeColor();
 					Group *gr = new Group(unit, map);
 					groups->push_back(gr);
 					currentGroup = gr;
@@ -99,6 +116,7 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 					interface->resetActionsStatusBar();
 				}
 				else if(unit->isGrouped()) {
+
 				}
 				break;
 			} else {
@@ -139,11 +157,12 @@ Player::~Player() {
 	delete groups;
 }
 void Player::refreshGroups() {
+	int i =0;
 	for(auto *group : *groups) {
 		if(group->refreshGroup()) {
-			groups->erase(std::remove(groups->begin(), groups->end(), group), groups->end());
-
+			groups->erase(groups->begin() + i);
 		}
+		i++;
 	}
 }
 

@@ -16,6 +16,7 @@ class Player {
 		void update(float dt, Map *map, Interface *interface, Point pos, Point posMouseWindow);
 		void draw(sf::RenderWindow &window);
 		void refreshGroups();
+		void resetGroups();
 		void sendActionsInterface(Interface *interface);
 		~Player();
 

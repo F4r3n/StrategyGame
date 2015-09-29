@@ -19,6 +19,7 @@ class Group {
 		void setDestination(Point arrivalCasePos, Point arrivalPos);
 		int getIdGroup();
 		bool getDelete();
+		void resetColor();
 	private:
 		static int idGroupTemp;
 		int idGroup;

@@ -20,9 +20,9 @@ class UIBorder : public Screen{
 		std::vector<GUI*> borders;
 		sf::Vector2i mousePos;
 		sf::Vector2f centerView;
-		float speed = 1000;	
+		float speed = 100;	
 		int numberBorder = 4;
-		int offset = 20;
+		int offset = 30;
 		
 
 };
