@@ -11,10 +11,13 @@ class Unit: public ClickableObject {
 		virtual void draw(sf::RenderWindow &window);
 		virtual void update(float dt, Point posMouse, Map *map);
 		virtual bool isSelected(Point posMouse);
+		virtual bool isSelected(Rect &rect);
 		bool isGrouped();
 		void setGroup(bool val);
 		int getIdGroup();
 		void setIdGroup(int id);
+		void setSelected(bool v);
+		virtual void changeColor();
 		int type = -1;
 		bool runningAction = false;
 		void initPathFinder(Map *map);
@@ -31,6 +34,7 @@ class Unit: public ClickableObject {
 		std::vector<Point> *path;
 		Point nextPosition;
 		int life;
+		bool selected = false;
 		bool hasGroup = false;
 		bool hasDestination = false;
 		PathFinder *pathFinder;

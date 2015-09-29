@@ -31,6 +31,28 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 
 	if(!Input::isMousePressed(sf::Mouse::Left) && isSelecting) {
 		isSelecting = false;
+		//	std::cout << "end" << std::endl;
+		Rect r(posStartRect, posEndRect);
+		//	std::cout << posStartRect << " " << posEndRect << " " <<r << std::endl;
+		//	Point rect(posStartRect, Point(posStartRect.x - posEndRect.x, posStartRect.y - posEndRect.y));
+		std::vector<Unit*> unitGroup;
+		bool s = false;
+		for(auto *unit : *units) {
+			if(unit->isSelected(r)) {
+				unit->setGroup(true);
+				unitGroup.push_back(unit);
+				s = true;
+				//			std::cout << "select" << std::endl;
+			}
+		}
+		if(s) {
+			Group *gr = new Group(unitGroup,map);
+
+			groups->push_back(gr);
+			currentGroup = gr;
+
+			groupSelected = true;
+		}
 	}
 
 	if(!Input::isMousePressed(sf::Mouse::Right)) {
@@ -49,7 +71,7 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 		posEndRect = pos;
 		shape->setPosition(posStartRect.x, posStartRect.y);
 		shape->setSize(sf::Vector2f(-posStartRect.x+posEndRect.x, -posStartRect.y+posEndRect.y));
-	//	std::cout << posStartRect.x << " " << posEndRect.x << std::endl;
+		//	std::cout << posStartRect.x << " " << posEndRect.x << std::endl;
 	}
 
 
@@ -64,25 +86,19 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 		Input::actionsClick["selectGroup"] = false;
 		for(auto *unit : *units) {
 			if(unit->isSelected(pos)) {
-				if(!unit->isGrouped() && unit->getBelonging() == 0) {
+				if(unit->getBelonging() == 0) {
 					unit->setGroup(true);
 					Group *gr = new Group(unit, map);
 					groups->push_back(gr);
 					currentGroup = gr;
 					sendActionsInterface(interface);
 					groupSelected = true;
+					refreshGroups();
 				}
 				else if(unit->getBelonging() !=0) {
 					interface->resetActionsStatusBar();
 				}
 				else if(unit->isGrouped()) {
-					for(auto *gr : *groups) {
-						if(gr->getIdGroup() == unit->getIdGroup()) {
-							currentGroup = gr;
-							groupSelected = true;
-							break;
-						}
-					}
 				}
 				break;
 			} else {
@@ -123,8 +139,12 @@ Player::~Player() {
 	delete groups;
 }
 void Player::refreshGroups() {
-	for(auto *group : *groups)
-		group->refreshGroup();
+	for(auto *group : *groups) {
+		if(group->refreshGroup()) {
+			groups->erase(std::remove(groups->begin(), groups->end(), group), groups->end());
+
+		}
+	}
 }
 
 void Player::draw(sf::RenderWindow &window) {

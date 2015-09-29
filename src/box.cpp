@@ -19,6 +19,17 @@ Box::Box(Point pos, Point size) {
 	shape->setFillColor(sf::Color::Black);
 }
 
+Box::Box(const Rect &rect) {
+	x = rect.x;
+	y = rect.y;
+	w = rect.w;
+	h = rect.h;
+	shape = new sf::RectangleShape();
+	shape->setSize(sf::Vector2f(w,h));
+	shape->setPosition(x,y);
+	shape->setFillColor(sf::Color::Black);
+}
+
 void Box::updateOffset(Point offset, Point current) {
 	int ax = current.x - offset.x;
 	int ay = current.y - offset.y;	
@@ -81,6 +92,15 @@ bool Box::AABB(Box *b) {
 }
 
 bool Box::AABB(Box &b) {
+	if((b.x >= x + w)      // trop à droite
+			  || (b.x + b.w <= x) // trop à gauche
+			  || (b.y >= y + h) // trop en bas
+			  || (b.y + b.h <= y))  // trop en haut
+		return false; 
+	else
+		return true; 
+}
+bool Box::AABB(Rect &b) {
 	if((b.x >= x + w)      // trop à droite
 			  || (b.x + b.w <= x) // trop à gauche
 			  || (b.y >= y + h) // trop en bas

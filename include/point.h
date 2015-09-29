@@ -11,6 +11,7 @@ class Point {
 		Point(sf::Vector2i v);
 		bool operator!=(const Point &a);
 		bool operator==(const Point &a);
+		Point& operator-(const Point &p);
 		Point& operator+(const Point &p);
 		Point& operator=(const Point &p);
 		Point& operator/(const Point &p);

@@ -16,6 +16,11 @@ Point& Point::operator/(const Point &p) {
 	y/=p.y;
 	return *this;
 }
+Point& Point::operator-(const Point &p) {
+	x-=p.x;
+	y-=p.y;
+	return *this;
+}
 std::ostream& operator<<(std::ostream &o, Point p) {
 	o << p.x << " " << p.y;
 	return o;

@@ -15,6 +15,14 @@ Unit::Unit(int belonging, Point pos, int life):ClickableObject(belonging) {
 
 }
 
+void Unit::changeColor() {
+
+}
+
+void Unit::setSelected(bool v) {
+	selected = v;
+}
+
 void Unit::draw(sf::RenderWindow &window){
 
 }
@@ -50,7 +58,13 @@ void Unit::setDestination(Point casePosArrival, Point posArrival) {
 }
 
 bool Unit::isSelected(Point posMouse) {
+	posMouse = posMouse;
 	return false;
+//	return false;
+}
+bool Unit::isSelected(Rect &rect) {
+	return false;
+//	return false;
 }
 void Unit::setGroup(bool val) {
 	hasGroup = val;
@@ -60,7 +74,6 @@ void Unit::update(float dt, Point posMouse, Map *map) {
 	casePosition = map->getPos(currentPos);
 //	std::cout << currentPos << std::endl;	
 	if(hasDestination) {
-		bool precised = false;
 		Point tempSpeed = speed;
 
 //	std::cout << casePosition <<" " << arrivalCasePos << std::endl;	
@@ -68,7 +81,6 @@ void Unit::update(float dt, Point posMouse, Map *map) {
 		float dy;
 		if(casePosition == arrivalCasePos) {
 			if(currentPos != arrivalPos) {
-				precised = true;
 			//	tempSpeed = 100;
 				float norme = sqrt(pow((currentPos.x-arrivalPos.x),2) + pow((currentPos.y - arrivalPos.y),2));
 				float dtempx = -currentPos.x + arrivalPos.x;
@@ -92,8 +104,8 @@ void Unit::update(float dt, Point posMouse, Map *map) {
 		}
 		else {
 			Point pos = path->front();
-			float coeffx = 1;
-			float coeffy = 1;
+		//	float coeffx = 1;
+		//	float coeffy = 1;
 			if(casePosition != pos) {
 
 				dx = -casePosition.x + pos.x;

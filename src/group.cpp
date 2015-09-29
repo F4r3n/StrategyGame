@@ -3,15 +3,17 @@
 
 int Group::idGroupTemp = 0;
 
-Group::Group(std::vector<Unit*> *listUnits) {
-	
+Group::Group(std::vector<Unit*> &listUnits, Map *map) {
+
 	idGroupTemp++;
 	idGroup = idGroupTemp;
 	units = new std::map<int,Unit*>();
-	for(auto *unit : *listUnits) {
+	for(auto *unit : listUnits) {
 
-	units->insert(std::pair<int, Unit*>(unit->getId(), unit));
-	unit->setIdGroup(idGroup);
+		unit->initPathFinder(map);
+		units->insert(std::pair<int, Unit*>(unit->getId(), unit));
+		unit->setIdGroup(idGroup);
+		unit->runningAction = true;
 	}
 }
 
@@ -56,13 +58,23 @@ bool Group::isExist(int id) {
 	return false;
 }
 
-void Group::refreshGroup() {
+bool Group::refreshGroup() {
 
 	for(auto &m : *units) {
 		if(m.second->getIdGroup() != idGroup) {
 			units->erase(m.first);
 		}
 	}
+	if(units->size() == 0) {
+		toDelete = true;
+		return true;
+	}
+
+	return false;
+}
+
+bool Group::getDelete() {
+	return toDelete;
 }
 
 void Group::addUnit(Unit *unit) {

@@ -6,6 +6,7 @@
 #include "interface.h"
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <algorithm>
 #include "villager.h"
 #include "point.h"
 #include "action.h"

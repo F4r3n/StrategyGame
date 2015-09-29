@@ -10,12 +10,16 @@ class Villager : public Unit {
 		Villager();
 		~Villager();
 		Villager(int belonging, Point pos, int life, float attack);
-
+		void changeColor();
 		bool isSelected(Point posMouse);
+		bool isSelected(Rect &rect);
 		void draw(sf::RenderWindow &window);
 		void update(float dt, Point posMouse, Map *map);
 	private:
 		sf::CircleShape *shape;
+		sf::Color normalColor;
+		sf::Color selectedColor;
+	//	sf::Color currentColor;
 	//	Box *box;
 		float attack;
 };

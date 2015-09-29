@@ -2,7 +2,7 @@
 #define CLICKABLE_OBJECT_H
 
 #include <SFML/Graphics.hpp>
-#include "point.h"
+#include "rect.h"
 #include "statusBar.h"
 
 #include "action.h"

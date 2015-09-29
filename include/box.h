@@ -4,10 +4,11 @@
 #include <vector>
 #include <algorithm>
 #include <SFML/Graphics.hpp>
-#include "point.h"
+#include "rect.h"
 class Box {
 	public:
 		Box(float x,float w, float y, float h);
+		Box(const Rect &rect);
 		Box(Point pos, Point size);
 		Box();
 		float getCenterX();
@@ -18,6 +19,7 @@ class Box {
 		bool AABB(Box &b);
 		bool pointer(float x, float y);
 		bool AABB(Point pos, Point size);
+		bool AABB(Rect &rect);
 		bool pointer(Point pos);
 		void updateOffset(Point offset, Point current);
 		sf::RectangleShape* getShape();
