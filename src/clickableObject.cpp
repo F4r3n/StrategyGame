@@ -26,7 +26,7 @@ int ClickableObject::getId() {
 	return id;
 }
 
-bool ClickableObject::isSelected(Point posMouse) {
+bool ClickableObject::isSelected(const Point &posMouse) {
 		bool touched = box->pointer(posMouse);
 		if(touched) {
 			return true;

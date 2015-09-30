@@ -17,12 +17,14 @@ class Player {
 		void draw(sf::RenderWindow &window);
 		void refreshGroups();
 		void resetGroups();
+		void fillGroup(Map *map);
 		void sendActionsInterface(Interface *interface);
 		~Player();
 
 	private:
 		std::vector<Unit*> *units; 
-		std::vector<Group*> *groups; 
+		std::vector<Group*> *groups;
+		std::vector<Unit*> selectedUnits;
 		Interface *interface;
 		Group *currentGroup;
 		Action *selectedAction;

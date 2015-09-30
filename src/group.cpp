@@ -8,8 +8,9 @@ Group::Group(std::vector<Unit*> &listUnits, Map *map) {
 	idGroupTemp++;
 	idGroup = idGroupTemp;
 	units = new std::map<int,Unit*>();
-	for(auto *unit : listUnits) {
 
+	for(auto *unit : listUnits) {
+		unit->setGroup(true);
 		unit->initPathFinder(map);
 		units->insert(std::pair<int, Unit*>(unit->getId(), unit));
 		unit->setIdGroup(idGroup);

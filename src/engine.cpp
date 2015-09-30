@@ -23,7 +23,8 @@ void Engine::run() {
 		//sf::Time frameTime = clock.restart();
 		sf::Event event;
 		accumulator += frameTime;
-
+		//std::cout << accumulator << " " << dt << std::endl;
+		
 		while( accumulator > dt) {
 			update(dt);	
 			accumulator -=dt;

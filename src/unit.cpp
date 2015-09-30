@@ -57,8 +57,8 @@ void Unit::setDestination(Point casePosArrival, Point posArrival) {
 	hasDestination = true;
 }
 
-bool Unit::isSelected(Point posMouse) {
-	posMouse = posMouse;
+bool Unit::isSelected(const Point &posMouse) {
+	//posMouse = posMouse;
 	return false;
 //	return false;
 }

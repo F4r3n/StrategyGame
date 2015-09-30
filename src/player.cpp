@@ -21,6 +21,17 @@ Player::Player() {
 void Player::resetGroups() {
 }
 
+void Player::fillGroup(Map *map) {
+
+
+	Group *gr = new Group(selectedUnits,map);
+	selectedUnits.clear();
+	groups->push_back(gr);
+	currentGroup = gr;
+	refreshGroups();
+	groupSelected = true;
+}
+
 void Player::update(float dt, Map *map, Interface *interface, Point pos, Point posMouseWindow) {
 	for(auto *unit : *units) {
 		unit->update(dt, pos,map);
@@ -35,17 +46,16 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 	if(!Input::isMousePressed(sf::Mouse::Left) && isSelecting) {
 		isSelecting = false;
 		//	std::cout << "end" << std::endl;
-		Rect r(posStartRect, posEndRect);
+		Rect r(posStartRect, posEndRect, Position::START_END);
 		//	std::cout << posStartRect << " " << posEndRect << " " <<r << std::endl;
 		//	Point rect(posStartRect, Point(posStartRect.x - posEndRect.x, posStartRect.y - posEndRect.y));
 		std::vector<Unit*> unitGroup;
 		bool s = false;
 		for(auto *unit : *units) {
 			if(unit->isSelected(r)) {
-				unit->setGroup(true);
 				unit->setSelected(true);
 				unit->changeColor();
-				unitGroup.push_back(unit);
+				selectedUnits.push_back(unit);
 				s = true;
 				//			std::cout << "select" << std::endl;
 			}
@@ -55,12 +65,12 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 				currentGroup->resetColor();
 				interface->resetActionsStatusBar();
 			}
-			Group *gr = new Group(unitGroup,map);
+		/*	Group *gr = new Group(unitGroup,map);
 
 			groups->push_back(gr);
 			currentGroup = gr;
 
-			groupSelected = true;
+			groupSelected = true;*/
 		}
 	}
 
@@ -86,6 +96,8 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 
 	if(Input::isMousePressed(sf::Mouse::Right) && Input::actionsClick["selectDestination"]) {
 		Input::actionsClick["selectDestination"] = false;
+		if(!selectedUnits.empty())
+		fillGroup(map);
 		if(groupSelected && currentGroup != nullptr && map->isWalkable(map->getPos(pos))) {
 			currentGroup->setDestination(map->getPos(pos), pos);
 		}
@@ -101,16 +113,10 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 		for(auto *unit : *units) {
 			if(unit->isSelected(pos)) {
 				if(unit->getBelonging() == 0) {
+					selectedUnits.push_back(unit);
 					//	if(currentGroup != nullptr) currentGroup->resetColor();
-					unit->setGroup(true);
 					unit->setSelected(true);
 					unit->changeColor();
-					Group *gr = new Group(unit, map);
-					groups->push_back(gr);
-					currentGroup = gr;
-					sendActionsInterface(interface);
-					groupSelected = true;
-					refreshGroups();
 				}
 				else if(unit->getBelonging() !=0) {
 					interface->resetActionsStatusBar();

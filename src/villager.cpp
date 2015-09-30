@@ -47,7 +47,7 @@ bool Villager::isSelected(Rect &rect) {
 		return false; 
 }
 
-bool Villager::isSelected(Point posMouse) {
+bool Villager::isSelected(const Point &posMouse) {
 		bool touched = box->pointer(posMouse);
 		if(touched) {
 			return true;

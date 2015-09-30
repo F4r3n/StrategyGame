@@ -31,8 +31,8 @@ Box::Box(const Rect &rect) {
 }
 
 void Box::updateOffset(Point offset, Point current) {
-	int ax = current.x - offset.x;
-	int ay = current.y - offset.y;	
+//	int ax = current.x - offset.x;
+//	int ay = current.y - offset.y;	
 }
 
 sf::RectangleShape* Box::getShape() {
@@ -56,7 +56,7 @@ void Box::configure(Point size, Point pos, sf::Color color) {
 
 }
 
-bool Box::AABB(Point pos, Point size) {
+bool Box::AABB(const Point pos, const Point size) {
 
 	if((pos.x >= x + w)      // trop à droite
 			  || (pos.x + size.x <= x) // trop à gauche
@@ -72,11 +72,11 @@ Box::~Box() {
 	delete shape;
 }
 
-float Box::getCenterX() {
+float Box::getCenterX() const {
 	return (x + w)/2;
 }
 
-float Box::getCenterY() {
+float Box::getCenterY() const{
 	return (y + h)/2;	
 }
 
@@ -91,7 +91,7 @@ bool Box::AABB(Box *b) {
 		return true; 
 }
 
-bool Box::AABB(Box &b) {
+bool Box::AABB(const Box &b) {
 	if((b.x >= x + w)      // trop à droite
 			  || (b.x + b.w <= x) // trop à gauche
 			  || (b.y >= y + h) // trop en bas
@@ -100,7 +100,7 @@ bool Box::AABB(Box &b) {
 	else
 		return true; 
 }
-bool Box::AABB(Rect &b) {
+bool Box::AABB(const Rect &b) {
 	if((b.x >= x + w)      // trop à droite
 			  || (b.x + b.w <= x) // trop à gauche
 			  || (b.y >= y + h) // trop en bas
@@ -109,7 +109,7 @@ bool Box::AABB(Rect &b) {
 	else
 		return true; 
 }
-bool Box::pointer(float cx, float cy) {
+bool Box::pointer(const float cx, const float cy) {
 	if((cx >= x)
 			  && (cx < x + w)
 			  && (cy >= y)
@@ -120,6 +120,6 @@ bool Box::pointer(float cx, float cy) {
 
 }
 
-bool Box::pointer(Point pos) {
+bool Box::pointer(const Point &pos) {
 	return pointer(pos.x, pos.y);
 }

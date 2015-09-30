@@ -12,7 +12,7 @@ class ClickableObject {
 		ClickableObject(int belonging);
 		virtual void draw(sf::RenderWindow &window);
 		virtual void update(float dt, Point posMouse, StatusBar *statusBar);
-		virtual bool isSelected(Point posMouse);
+		virtual bool isSelected(const Point &posMouse);
 		std::vector<Action*> getActions();
 		int getId();
 		void deselect();

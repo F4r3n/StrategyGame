@@ -5,13 +5,13 @@
 #include <SFML/Graphics.hpp>
 #include "point.h"
 
-class Villager : public Unit {
+class Villager final : public Unit {
 	public:
 		Villager();
 		~Villager();
 		Villager(int belonging, Point pos, int life, float attack);
 		void changeColor();
-		bool isSelected(Point posMouse);
+		bool isSelected(const Point &posMouse);
 		bool isSelected(Rect &rect);
 		void draw(sf::RenderWindow &window);
 		void update(float dt, Point posMouse, Map *map);

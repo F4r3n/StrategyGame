@@ -3,10 +3,12 @@
 
 #include "point.h"
 
+enum Position { START_END, START_SIZE};
+
 class Rect {
 	public:
 		Rect();
-		Rect(Point pos, Point posEnd);
+		Rect(Point pos, Point posEnd, Position type);
 		Rect(int x, int y, int w, int h);
 		Rect(sf::Vector2f v, int offsetX = 0, int offsetY = 0);
 		Rect(sf::Vector2i v);
