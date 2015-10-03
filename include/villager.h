@@ -19,8 +19,6 @@ class Villager final : public Unit {
 		sf::CircleShape *shape;
 		sf::Color normalColor;
 		sf::Color selectedColor;
-	//	sf::Color currentColor;
-	//	Box *box;
 		float attack;
 };
 

@@ -39,6 +39,14 @@ void Unit::setIdGroup(int id) {
 	idGroup = id;
 }
 
+void Unit::setBucket(int id) {
+	idBucket = id;
+}
+
+int Unit::getIdBucket() {
+	return idBucket;
+}
+
 void Unit::initPathFinder(Map *map) {
 	pathFinder = new PathFinder(map);
 }

@@ -43,9 +43,6 @@ Rect::Rect(Point pos, Point posEnd, Position type) {
 		w = posEnd.x;
 		h = posEnd.y;
 	}
-
-
-
 }
 
 Rect::Rect(sf::Vector2f v, int offsetX, int offsetY) {

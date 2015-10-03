@@ -4,7 +4,7 @@
 #include "ground.h"
 #include <memory>
 
-class BuildGround : public Ground{
+class BuildGround final : public Ground{
 	public:
 		BuildGround(Point pos, Point size);
 		~BuildGround();

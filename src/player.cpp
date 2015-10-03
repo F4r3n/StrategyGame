@@ -21,7 +21,7 @@ Player::Player() {
 void Player::resetGroups() {
 }
 
-void Player::fillGroup(Map *map) {
+void Player::fillGroup(Map *map, Interface *interface) {
 
 
 	Group *gr = new Group(selectedUnits,map);
@@ -45,10 +45,7 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 
 	if(!Input::isMousePressed(sf::Mouse::Left) && isSelecting) {
 		isSelecting = false;
-		//	std::cout << "end" << std::endl;
 		Rect r(posStartRect, posEndRect, Position::START_END);
-		//	std::cout << posStartRect << " " << posEndRect << " " <<r << std::endl;
-		//	Point rect(posStartRect, Point(posStartRect.x - posEndRect.x, posStartRect.y - posEndRect.y));
 		std::vector<Unit*> unitGroup;
 		bool s = false;
 		for(auto *unit : *units) {
@@ -57,7 +54,6 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 				unit->changeColor();
 				selectedUnits.push_back(unit);
 				s = true;
-				//			std::cout << "select" << std::endl;
 			}
 		}
 		if(s) {
@@ -65,20 +61,12 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 				currentGroup->resetColor();
 				interface->resetActionsStatusBar();
 			}
-		/*	Group *gr = new Group(unitGroup,map);
-
-			groups->push_back(gr);
-			currentGroup = gr;
-
-			groupSelected = true;*/
 		}
 	}
 
 	if(!Input::isMousePressed(sf::Mouse::Right)) {
 		Input::actionsClick["selectDestination"] = true;
 	}
-
-
 
 	if(Input::isMousePressed(sf::Mouse::Left) && Input::actionsClick["selectRect"]) {
 		posStartRect = pos;
@@ -97,7 +85,7 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 	if(Input::isMousePressed(sf::Mouse::Right) && Input::actionsClick["selectDestination"]) {
 		Input::actionsClick["selectDestination"] = false;
 		if(!selectedUnits.empty())
-		fillGroup(map);
+		fillGroup(map, interface);
 		if(groupSelected && currentGroup != nullptr && map->isWalkable(map->getPos(pos))) {
 			currentGroup->setDestination(map->getPos(pos), pos);
 		}

@@ -17,7 +17,7 @@ class Player {
 		void draw(sf::RenderWindow &window);
 		void refreshGroups();
 		void resetGroups();
-		void fillGroup(Map *map);
+		void fillGroup(Map *map, Interface *interface);
 		void sendActionsInterface(Interface *interface);
 		~Player();
 

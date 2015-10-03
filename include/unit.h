@@ -22,8 +22,11 @@ class Unit: public ClickableObject {
 		bool runningAction = false;
 		void initPathFinder(Map *map);
 		void setDestination(Point casePosArrival, Point posArrival);
+		void setBucket(int id);
+		int getIdBucket();
 
 	protected:
+		int idBucket = 0;
 		int idGroup = -1;
 		Point speed;
 		float x = 0;
@@ -42,5 +45,6 @@ class Unit: public ClickableObject {
 
 
 };
+
 
 #endif
