@@ -27,7 +27,8 @@ Map::Map(int w, int h, int wt, int ht): widthMap(w), heightMap(h), widthTile(wt)
 }
 
 Point Map::getPos(Point pos) {
-	return Point(pos.x/widthTile, pos.y/heightTile);
+	if(widthTile !=0 && heightTile !=0)
+		return Point(pos.x/widthTile, pos.y/heightTile);
 }
 
 Point Map::getCenter(Point pos) {

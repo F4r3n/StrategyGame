@@ -3,7 +3,7 @@
 
 Level::Level() {
 	//map = new Map(100,100,10,10);
-	map = new Map("./assets/map");
+	map = new Map("../assets/map");
 	interface = new Interface();
 	player = new Player();
 
