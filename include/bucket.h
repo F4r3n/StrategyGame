@@ -12,6 +12,7 @@ class Bucket {
 		bool contains(Unit *unit);
 		void addUnit(Unit *unit);
 		void remove(int id);
+		int getSize() const;
 		std::vector<Unit*> refresh();
 	private:
 		int id;

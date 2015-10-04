@@ -45,6 +45,17 @@ Rect::Rect(Point pos, Point posEnd, Position type) {
 	}
 }
 
+bool Rect::pointer(const Point &p) {
+	if((p.x >= x)
+			  && (p.x < x + w)
+			  && (p.y >= y)
+			  && (p.y < y + h))
+		return true;
+	else 
+		return false;
+
+}
+
 Rect::Rect(sf::Vector2f v, int offsetX, int offsetY) {
 	x = v.x + offsetX;
 	y = v.y + offsetY;

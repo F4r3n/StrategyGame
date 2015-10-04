@@ -5,7 +5,7 @@ Level::Level() {
 	//map = new Map(100,100,10,10);
 	map = new Map("../assets/map");
 	interface = new Interface();
-	player = new Player(map->getSizeMap());
+	player = new Player(map);
 
 	centerX = 0;
 	centerY = 0;

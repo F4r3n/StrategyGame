@@ -11,7 +11,7 @@
 #include "managerBucket.h"
 class Player {
 	public :
-		Player(Point size);
+		Player(Map *map);
 		void update(float dt, Map *map, Interface *interface, Point pos, Point posMouseWindow);
 		void draw(sf::RenderWindow &window);
 		void refreshGroups();

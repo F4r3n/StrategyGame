@@ -15,17 +15,24 @@ void ManagerBucket::addUnit(Unit *unit) {
 	for(auto bucket : buckets) {
 		if(bucket->contains(unit)) {
 			bucket->addUnit(unit);
-			buckets[oldIdBucket]->remove(id);
+			if(oldIdBucket != -1)
+				buckets[oldIdBucket]->remove(id);
 			break;
 		}
 	}
 }
 
+void ManagerBucket::addUnit(std::vector<Unit*> *units) {
+	for(auto *unit: *units) {
+		addUnit(unit);
+	}
+}
 ManagerBucket::~ManagerBucket() {}
 
 void ManagerBucket::update(float dt, Point posMouse, Map *map) {
 	for(auto bucket : buckets) {
 		bucket->update(dt,posMouse,map);
+		bucket->getSize();
 		std::vector<Unit*> change = bucket->refresh();
 		changeBucket.insert(changeBucket.end(),change.begin(), change.end());
 	}

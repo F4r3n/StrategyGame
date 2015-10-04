@@ -2,13 +2,13 @@
 #include "input.h"
 #include <cmath>
 
-Player::Player(Point size) {
-	ManagerBucket bucketManager;
-	bucketManager.addBucket(0,new Bucket(0,Rect(0,0,50,50)));
-	bucketManager.addBucket(1,new Bucket(1,Rect(50,0,50,50)));
-	bucketManager.addBucket(2,new Bucket(2,Rect(0,50,50,50)));
-	bucketManager.addBucket(3,new Bucket(3,Rect(50,50,50,50)));
-
+Player::Player(Map *map) {
+	Point sizeTile = map->getSizeMap();
+	Point sizeMap = map->getSizeTile();;
+	bucketManager.addBucket(0,new Bucket(0,Rect(0,0,sizeTile.x*sizeMap.x/2,sizeTile.y*sizeMap.y/2)));
+	bucketManager.addBucket(1,new Bucket(1,Rect(sizeTile.x*sizeMap.x/20,0,sizeTile.x*sizeMap.x/20,sizeTile.y*sizeMap.y/20)));
+	bucketManager.addBucket(2,new Bucket(2,Rect(0,sizeTile.y*sizeMap.y/2,sizeTile.x*sizeMap.x/2,sizeTile.y*sizeMap.y/2)));
+	bucketManager.addBucket(3,new Bucket(3,Rect(sizeTile.x*sizeMap.x/2,sizeTile.y*sizeMap.y/2,sizeTile.x*sizeMap.x/2,sizeTile.y*sizeMap.y/2)));
 	shape = std::unique_ptr<sf::RectangleShape>(new sf::RectangleShape());
 	shape->setFillColor(sf::Color(0,0,0,0));
 	shape->setOutlineThickness(5);
@@ -17,6 +17,7 @@ Player::Player(Point size) {
 	groups = new std::vector<Group*>();
 	units->push_back(new Villager(0, Point(300,300),100,10));
 	units->push_back(new Villager(0, Point(200,200),100,10));
+	bucketManager.addUnit(units);
 	Input::actionsClick["selectSingle"] = true;
 	Input::actionsClick["selectGroup"] = true;
 	Input::actionsClick["selectRect"] = true;
@@ -39,9 +40,8 @@ void Player::fillGroup(Map *map, Interface *interface) {
 }
 
 void Player::update(float dt, Map *map, Interface *interface, Point pos, Point posMouseWindow) {
-	for(auto *unit : *units) {
-		unit->update(dt, pos,map);
-	}
+	bucketManager.update(dt,pos, map);
+
 	if(!Input::isMousePressed(sf::Mouse::Left)) {
 		Input::actionsClick["selectSingle"] = true;
 		Input::actionsClick["selectGroup"] = true;

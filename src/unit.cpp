@@ -12,7 +12,10 @@ Unit::Unit(int belonging, Point pos, int life):ClickableObject(belonging) {
 	path = new std::vector<Point>();
 	speed.x = 100;
 	speed.y = 100;
+}
 
+Point Unit::getPos() {
+	return currentPos;
 }
 
 void Unit::changeColor() {
