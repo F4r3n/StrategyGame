@@ -6,7 +6,6 @@
 #include <iostream>
 #include <fstream>
 #include <SFML/Graphics.hpp>
-#include "point.h"
 #include <memory>
 #include "case.h"
 #include "buildGround.h"

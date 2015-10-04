@@ -1,18 +1,17 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "map.h"
 #include "group.h"
 #include "interface.h"
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <algorithm>
 #include "villager.h"
-#include "point.h"
 #include "action.h"
+#include "managerBucket.h"
 class Player {
 	public :
-		Player();
+		Player(Point size);
 		void update(float dt, Map *map, Interface *interface, Point pos, Point posMouseWindow);
 		void draw(sf::RenderWindow &window);
 		void refreshGroups();
@@ -22,6 +21,7 @@ class Player {
 		~Player();
 
 	private:
+		ManagerBucket bucketManager;
 		std::vector<Unit*> *units; 
 		std::vector<Group*> *groups;
 		std::vector<Unit*> selectedUnits;

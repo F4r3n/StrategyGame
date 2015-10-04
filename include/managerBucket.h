@@ -9,14 +9,16 @@
 
 class ManagerBucket {
 	public:
-		ManagerBucket(int pos, Bucket *bucket);
+		ManagerBucket();
+		void addBucket(int pos, Bucket *bucket);
 		~ManagerBucket();
-		void update(float dt, Map *map);
+		void update(float dt, Point posMouse, Map *map);
 		void draw(sf::RenderWindow &window);
 		void addUnit(Unit *unit);
 
 	private:
 		std::array<std::shared_ptr<Bucket> , 4> buckets;
+		std::vector<Unit*> changeBucket;
 };
 
 

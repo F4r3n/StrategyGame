@@ -2,7 +2,13 @@
 #include "input.h"
 #include <cmath>
 
-Player::Player() {
+Player::Player(Point size) {
+	ManagerBucket bucketManager;
+	bucketManager.addBucket(0,new Bucket(0,Rect(0,0,50,50)));
+	bucketManager.addBucket(1,new Bucket(1,Rect(50,0,50,50)));
+	bucketManager.addBucket(2,new Bucket(2,Rect(0,50,50,50)));
+	bucketManager.addBucket(3,new Bucket(3,Rect(50,50,50,50)));
+
 	shape = std::unique_ptr<sf::RectangleShape>(new sf::RectangleShape());
 	shape->setFillColor(sf::Color(0,0,0,0));
 	shape->setOutlineThickness(5);

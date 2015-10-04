@@ -1,7 +1,6 @@
 #ifndef PATHFINDER_H
 #define PATHFINDER_H
 
-#include "point.h"
 #include "map.h"
 #include <vector>
 #include <math.h>
