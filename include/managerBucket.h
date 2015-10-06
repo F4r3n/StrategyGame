@@ -10,6 +10,7 @@
 class ManagerBucket {
 	public:
 		ManagerBucket();
+		ManagerBucket(Point sizeMap, Point sizeTile);
 		void addBucket(int pos, Bucket *bucket);
 		~ManagerBucket();
 		void update(float dt, Point posMouse, Map *map);
@@ -18,7 +19,7 @@ class ManagerBucket {
 		void addUnit(std::vector<Unit*> *unit);
 
 	private:
-		std::array<std::shared_ptr<Bucket> , 4> buckets;
+		std::vector<std::shared_ptr<Bucket>> buckets;
 		std::vector<Unit*> changeBucket;
 };
 

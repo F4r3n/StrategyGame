@@ -1,11 +1,22 @@
 #include "managerBucket.h"
 
-ManagerBucket::ManagerBucket() {
-}
+ManagerBucket::ManagerBucket() {}
 
+ManagerBucket::ManagerBucket(Point sizeMap, Point sizeTile) {
+	int k = 0;
+	int sizeBucket = 4;
+	std::cout << sizeMap.x/sizeBucket << std::endl;
+	for(int i=0;i<sizeMap.y/sizeBucket;++i) {
+		for(int j=0;j<sizeMap.x/sizeBucket ;++j) {
+			buckets.push_back(std::shared_ptr<Bucket>(new Bucket(k,
+							  Rect(j*sizeTile.x*sizeBucket, i*sizeTile.y*sizeBucket, sizeTile.x*sizeBucket, sizeTile.y*sizeBucket))));
+			k++;
+		}
+	}
+}
 void ManagerBucket::addBucket(int pos, Bucket *bucket) {
 
-	buckets.at(pos) = std::shared_ptr<Bucket>(bucket);
+	buckets.push_back(std::shared_ptr<Bucket>(bucket));
 }
 
 void ManagerBucket::addUnit(Unit *unit) {

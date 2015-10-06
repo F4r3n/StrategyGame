@@ -3,6 +3,7 @@
 
 #include "unit.h"
 #include <map>
+#include <memory>
 class Bucket {
 	public:
 		Bucket(int id,Rect rect);
@@ -15,6 +16,8 @@ class Bucket {
 		int getSize() const;
 		std::vector<Unit*> refresh();
 	private:
+
+		std::unique_ptr<sf::RectangleShape> shape;
 		int id;
 		Rect rect;
 		std::map<int ,Unit*> units;

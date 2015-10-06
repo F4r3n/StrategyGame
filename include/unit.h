@@ -10,8 +10,8 @@ class Unit: public ClickableObject {
 		virtual ~Unit();
 		virtual void draw(sf::RenderWindow &window);
 		virtual void update(float dt, Point posMouse, Map *map);
-		virtual bool isSelected(const Point &posMouse);
-		virtual bool isSelected(Rect &rect);
+		bool isSelected(const Point &posMouse);
+		bool isSelected(Rect &rect);
 		bool isGrouped();
 		void setGroup(bool val);
 		int getIdGroup();

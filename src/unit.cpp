@@ -69,12 +69,18 @@ void Unit::setDestination(Point casePosArrival, Point posArrival) {
 }
 
 bool Unit::isSelected(const Point &posMouse) {
-	//posMouse = posMouse;
-	return false;
-//	return false;
+		bool touched = box->pointer(posMouse);
+		if(touched) {
+			return true;
+		}
+		return false; 
 }
 bool Unit::isSelected(Rect &rect) {
-	return false;
+		bool touched = box->AABB(rect);
+		if(touched) {
+			return true;
+		}
+		return false; 
 //	return false;
 }
 void Unit::setGroup(bool val) {

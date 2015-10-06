@@ -4,11 +4,13 @@
 
 Player::Player(Map *map) {
 	Point sizeTile = map->getSizeMap();
-	Point sizeMap = map->getSizeTile();;
-	bucketManager.addBucket(0,new Bucket(0,Rect(0,0,sizeTile.x*sizeMap.x/2,sizeTile.y*sizeMap.y/2)));
+	Point sizeMap = map->getSizeTile();
+	bucketManager = ManagerBucket(sizeMap,sizeTile);
+
+/*	bucketManager.addBucket(0,new Bucket(0,Rect(0,0,sizeTile.x*sizeMap.x/2,sizeTile.y*sizeMap.y/2)));
 	bucketManager.addBucket(1,new Bucket(1,Rect(sizeTile.x*sizeMap.x/20,0,sizeTile.x*sizeMap.x/20,sizeTile.y*sizeMap.y/20)));
 	bucketManager.addBucket(2,new Bucket(2,Rect(0,sizeTile.y*sizeMap.y/2,sizeTile.x*sizeMap.x/2,sizeTile.y*sizeMap.y/2)));
-	bucketManager.addBucket(3,new Bucket(3,Rect(sizeTile.x*sizeMap.x/2,sizeTile.y*sizeMap.y/2,sizeTile.x*sizeMap.x/2,sizeTile.y*sizeMap.y/2)));
+	bucketManager.addBucket(3,new Bucket(3,Rect(sizeTile.x*sizeMap.x/2,sizeTile.y*sizeMap.y/2,sizeTile.x*sizeMap.x/2,sizeTile.y*sizeMap.y/2)));*/
 	shape = std::unique_ptr<sf::RectangleShape>(new sf::RectangleShape());
 	shape->setFillColor(sf::Color(0,0,0,0));
 	shape->setOutlineThickness(5);
@@ -171,7 +173,5 @@ void Player::draw(sf::RenderWindow &window) {
 	if(isSelecting) {
 		window.draw(*shape);
 	}
-
-	for(auto *unit : *units)
-		unit->draw(window);
+	bucketManager.draw(window);
 }

@@ -39,22 +39,9 @@ void Villager::draw(sf::RenderWindow &window) {
 	//window.draw(*box->getShape());
 
 }
-bool Villager::isSelected(Rect &rect) {
-		bool touched = box->AABB(rect);
-		if(touched) {
-			return true;
-		}
-		return false; 
-}
 
-bool Villager::isSelected(const Point &posMouse) {
-		bool touched = box->pointer(posMouse);
-		if(touched) {
-			return true;
-		}
-		return false; 
-}
 void Villager::update(float dt, Point posMouse, Map *map) {
+//	if(selected) std::cout << idBucket << std::endl;
 	Unit::update(dt,posMouse,map);
 //	box->updateOffset(offsetDraw, Point(box->x, box->y));
 	shape->setPosition(box->x, box->y);

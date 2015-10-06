@@ -11,8 +11,6 @@ class Villager final : public Unit {
 		~Villager();
 		Villager(int belonging, Point pos, int life, float attack);
 		void changeColor();
-		bool isSelected(const Point &posMouse);
-		bool isSelected(Rect &rect);
 		void draw(sf::RenderWindow &window);
 		void update(float dt, Point posMouse, Map *map);
 	private:
