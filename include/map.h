@@ -20,17 +20,18 @@ class Map {
 		void update(float dt);
 		Point getSizeMap();
 		Point getSizeTile();
-		Point getPos(Point pos);
+		static Point getPos(Point pos);
 		bool validPoint(Point &pos);
 		void setColorTile(Point pos, sf::Color color);
-		Point getCenter(Point pos);
+		static Point getCenterCase(Point pos);
 		bool isWalkable(Point pos);
 		void reset();
 		~Map();
 	
 	private:
 		int widthMap, heightMap;
-		int widthTile, heightTile;
+		static int widthTile;
+		static int heightTile;
 		std::vector<std::shared_ptr<Case> > *tiles;	
 		std::vector<std::shared_ptr<sf::RectangleShape> > *tilesTemp;	
 		

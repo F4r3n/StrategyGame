@@ -1,10 +1,15 @@
 #include "map.h"
 
+int Map::widthTile = 0;
+int Map::heightTile = 0;
+
 
 Map::Map() {}
 
-Map::Map(int w, int h, int wt, int ht): widthMap(w), heightMap(h), widthTile(wt), heightTile(ht) {
+Map::Map(int w, int h, int wt, int ht): widthMap(w), heightMap(h) {
 	tiles = new std::vector<std::shared_ptr<Case> >();
+	widthTile = wt;
+	heightTile = ht;
 	int size = w*h;
 	for(int i=0;i<w;i++) {
 		for(int j=0;j<h;j++) {
@@ -27,12 +32,12 @@ Map::Map(int w, int h, int wt, int ht): widthMap(w), heightMap(h), widthTile(wt)
 }
 
 Point Map::getPos(Point pos) {
-	if(widthTile !=0 && heightTile !=0)
 		return Point(pos.x/widthTile, pos.y/heightTile);
 }
 
-Point Map::getCenter(Point pos) {
-	return Point(pos.x+widthTile/2, pos.y+heightTile/2);
+
+Point Map::getCenterCase(Point square) {
+	return Point(square.x*widthTile + widthTile/2, square.y*heightTile + heightTile/2);
 }
 
 Point Map::getSizeMap() {

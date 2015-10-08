@@ -54,64 +54,69 @@ void Unit::initPathFinder(Map *map) {
 	pathFinder = new PathFinder(map);
 }
 
-void Unit::setDestination(Point casePosArrival, Point posArrival) {
-	arrivalPos = posArrival;
-//	Point p(30,30);
-//	std::cout << arrivalCasePos << std::endl;
-	arrivalCasePos = casePosArrival;
-	
-//	std::cout << "dest " <<arrivalPos << std::endl;
+void Unit::setDestination(Point posArrival) {
+	Point dest = posArrival - offsetDraw;
+	arrivalPos = dest;
+	arrivalCasePos = Map::getPos(dest);
 
-	if(casePosition == casePosArrival) return;
-	pathFinder->setDestination(casePosition,casePosArrival);
+	if(casePosition == Map::getPos(dest)) return;
+	pathFinder->setDestination(casePosition,Map::getPos(dest));
 	path = pathFinder->getPoints();
 	hasDestination = true;
 }
 
 bool Unit::isSelected(const Point &posMouse) {
-		bool touched = box->pointer(posMouse);
-		if(touched) {
-			return true;
-		}
-		return false; 
+	bool touched = box->pointer(posMouse);
+	if(touched) {
+		return true;
+	}
+	return false; 
 }
 bool Unit::isSelected(Rect &rect) {
-		bool touched = box->AABB(rect);
-		if(touched) {
-			return true;
-		}
-		return false; 
-//	return false;
+	bool touched = box->AABB(rect);
+	if(touched) {
+		return true;
+	}
+	return false; 
 }
 void Unit::setGroup(bool val) {
 	hasGroup = val;
 }
 
 void Unit::update(float dt, Point posMouse, Map *map) {
-	casePosition = map->getPos(currentPos);
-//	std::cout << currentPos << std::endl;	
+	casePosition = Map::getPos(currentPos);
 	if(hasDestination) {
+		Point tempPos;
 		Point tempSpeed = speed;
 
-//	std::cout << casePosition <<" " << arrivalCasePos << std::endl;	
 		float dx;
 		float dy;
+		Point pos = path->front();
+		tempPos = Map::getCenterCase(pos); 
+		float norme = sqrt(pow((currentPos.x - tempPos.x), 2) + pow((currentPos.y - tempPos.y), 2));
+		float dtempx = -currentPos.x + tempPos.x;
+		float dtempy = -currentPos.y + tempPos.y;
+		dx = (dtempx)/norme;
+		dy = (dtempy)/norme;
+
+		if((abs(dtempx) == 0 || abs(dtempx) <= 3) && (abs(dtempy) == 0 || abs(dtempy) <= 3)) {
+			if(path->size() > 0)
+				path->erase(path->begin());
+		}
+
 		if(casePosition == arrivalCasePos) {
 			if(currentPos != arrivalPos) {
-			//	tempSpeed = 100;
-				float norme = sqrt(pow((currentPos.x-arrivalPos.x),2) + pow((currentPos.y - arrivalPos.y),2));
-				float dtempx = -currentPos.x + arrivalPos.x;
-				float dtempy = -currentPos.y +arrivalPos.y;
+				norme = sqrt(pow((currentPos.x - arrivalPos.x), 2) + pow((currentPos.y - arrivalPos.y), 2));
+				dtempx = -currentPos.x + arrivalPos.x;
+				dtempy = -currentPos.y + arrivalPos.y;
 				dx = (dtempx)/norme;
 				dy = (dtempy)/norme;
-		//		std::cout << dtempx << " " << dtempy << std::endl;
-//TODO a normaliser en fonction de la vitesse
-				if((abs(dtempx) == 0 || abs(dtempx) <=3) && (abs(dtempy) ==0 || abs(dtempy)<=3)) {
+				//TODO a normaliser en fonction de la vitesse
+				if((abs(dtempx) == 0 || abs(dtempx) <= 3) && (abs(dtempy) == 0 || abs(dtempy) <= 3)) {
 					hasDestination = false;
 					dx = 0;
 					dy = 0;
 				}
-			//	std::cout << currentPos.x << " " << currentPos.y << " " << arrivalPos.x << " " << arrivalPos.y <<" " << dx << " " << dy << std::endl;
 			}
 			else {
 				hasDestination = false;
@@ -119,36 +124,14 @@ void Unit::update(float dt, Point posMouse, Map *map) {
 				dy = 0;
 			}
 		}
-		else {
-			Point pos = path->front();
-		//	float coeffx = 1;
-		//	float coeffy = 1;
-			if(casePosition != pos) {
 
-				dx = -casePosition.x + pos.x;
-				dy = -casePosition.y + pos.y;
-				//	coeffx = cos(distance.y/distance.x);
-				//	coeffy = sin(distance.y/distance.x);
-			}
-			else if(casePosition == arrivalPos) {
-			}
-			else if(casePosition == pos) {
-				dx = abs(casePosition.x - pos.x);
-				dy = abs(casePosition.y - pos.y);
-				if(path->size()>0)
-					path->erase(path->begin());
-			}
-		}
-		x += tempSpeed.x*dt*dx;
-		y += tempSpeed.y*dt*dy;
+		x += tempSpeed.x * dt * dx;
+		y += tempSpeed.y * dt * dy;
 		box->x = x;
 		box->y = y;
-		currentPos.x = box->x+offsetDraw.x;
-		currentPos.y = box->y+offsetDraw.y;
-		//	box->x = currentPos.x;
-		//	box->y = currentPos.y;
+		currentPos.x = box->x;
+		currentPos.y = box->y;
 	}
 }
 
-Unit::~Unit() {
-}
+Unit::~Unit() {}

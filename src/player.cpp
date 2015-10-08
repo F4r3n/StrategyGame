@@ -95,7 +95,7 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 		if(!selectedUnits.empty())
 		fillGroup(map, interface);
 		if(groupSelected && currentGroup != nullptr && map->isWalkable(map->getPos(pos))) {
-			currentGroup->setDestination(map->getPos(pos), pos);
+			currentGroup->setDestination(pos);
 		}
 	}
 
