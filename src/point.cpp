@@ -3,7 +3,6 @@
 Point::Point(){}
 
 Point::Point(int x, int y): x(x), y(y) {
-
 }
 
 Point::Point(sf::Vector2f v, int offsetX, int offsetY) {
@@ -34,6 +33,10 @@ bool Point::operator!=(const Point &p) {
 }
 bool Point::operator==(const Point &p) {
 	return (p.x == x && p.y==y);
+}
+
+bool Point::operator<(const Point &p) const {
+return x < p.x || (x == p.x && y < p.y);
 }
 
 Point& Point::operator+(const Point &p) {

@@ -41,6 +41,14 @@ void Player::fillGroup(Map *map, Interface *interface) {
 	groupSelected = true;
 }
 
+void Player::resetSelectedUnits() {
+	for(auto *unit : selectedUnits) {
+		unit->setSelected(false);
+		unit->changeColor();
+	}
+	selectedUnits.clear();
+}
+
 void Player::update(float dt, Map *map, Interface *interface, Point pos, Point posMouseWindow) {
 	bucketManager.update(dt,pos, map);
 
@@ -124,6 +132,7 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 			} else {
 				interface->resetActionsStatusBar();
 				map->reset();
+				resetSelectedUnits();
 				groupSelected = false;
 				currentGroup = nullptr;
 			}

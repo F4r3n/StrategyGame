@@ -3,6 +3,7 @@
 
 #include "map.h"
 #include <vector>
+#include <map>
 #include <math.h>
 #include <queue>
 #include <algorithm>
@@ -28,6 +29,7 @@ class PathFinder {
 		PathFinder();
 		std::vector<Node*> nearestCases(Node *nextPosition, float offset);
 		float euclideanDistance(Point point);
+		float euclideanDistance(Point a, Point b);
 		float chebyshevDistance(Point newDistance);
 		void fillNodes(std::priority_queue<Node*, std::vector<Node*>,Comparator> &nodes, std::vector<Node*> &vnode);
 		~PathFinder();
@@ -38,8 +40,10 @@ class PathFinder {
 
 	private:
 		Point destination;
+		Point start;
 		Point currentPosition;
 		std::vector<Point> points;
+		std::map<Point, Point> mapPoints;
 		Map *map;
 		bool **bmap;
 };

@@ -18,6 +18,7 @@ class Player {
 		void resetGroups();
 		void fillGroup(Map *map, Interface *interface);
 		void sendActionsInterface(Interface *interface);
+		void resetSelectedUnits();
 		~Player();
 
 	private:

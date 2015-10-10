@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <sstream>
+#include <string>
 class Point {
 	public:
 		Point();
@@ -15,6 +17,7 @@ class Point {
 		Point& operator+(const Point &p);
 		Point& operator=(const Point &p);
 		Point& operator/(const Point &p);
+		bool operator<(const Point &p) const;
 		friend std::ostream& operator<<(std::ostream &o, Point p);
 		~Point();
 		int x;
