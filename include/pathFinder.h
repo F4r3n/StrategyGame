@@ -44,6 +44,7 @@ class PathFinder {
 		Point currentPosition;
 		std::vector<Point> points;
 		std::map<Point, Point> mapPoints;
+		std::map<Point, int> cost;
 		Map *map;
 		bool **bmap;
 };

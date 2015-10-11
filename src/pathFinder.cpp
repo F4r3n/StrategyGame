@@ -15,16 +15,21 @@ PathFinder::PathFinder(Map *map):map(map) {
 
 std::vector<Node*> PathFinder::nearestCases(Node *nextPosition, float offset) {
 	std::vector<Node*> nodes;
+	float new_cost = 0;
 	for(int i=-1; i< 2;i++) {
 		for(int j=-1; j<2;j++) {
 			//	if(abs(i) == abs(j)) continue;
 			Point pos(nextPosition->currentPos.x + i, nextPosition->currentPos.y + j);
 			if(map->validPoint(pos) && bmap[pos.x][pos.y] && map->isWalkable(pos)) {
+
+				new_cost = cost[nextPosition->currentPos] +  euclideanDistance(nextPosition->currentPos, pos);
+				cost[pos] = new_cost;
+				
 				map->setColorTile(pos, sf::Color(100,0,0));
 				mapPoints.insert(std::pair<Point,Point>(pos, nextPosition->currentPos));
 				Node *n = new Node();
 				n->currentPos = pos;
-				n->weight = euclideanDistance(pos) + euclideanDistance(nextPosition->currentPos, pos);
+				n->weight = new_cost + euclideanDistance(pos);
 				n->parent = nextPosition;
 				nodes.push_back(n);
 				bmap[pos.x][pos.y] = false;
@@ -100,17 +105,15 @@ void PathFinder::setDestination(Point currentPos, Point dest) {
 	Point nextPosition;
 	Node *currentNode;
 	mapPoints.insert(std::pair<Point,Point>(firstNode->currentPos, firstNode->currentPos));
+	cost[firstNode->currentPos] = 0;
 	do{
 		currentNode = nodes.top();
-		//firstNode = 
-		//	currentNode->parent = firstNode;
 
 		nextPosition = currentNode->currentPos;
 		nodes.pop();
 		std::vector<Node*> nextNodes = nearestCases(currentNode, 1);
 		fillNodes(nodes, nextNodes);
 
-		//	bmap[nextPosition.x][nextPosition.y] = true;
 		i++;
 		if(nodes.size() ==0) break;
 	}while(nextPosition != dest);
