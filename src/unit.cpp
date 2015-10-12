@@ -54,13 +54,14 @@ void Unit::initPathFinder(Map *map) {
 	pathFinder = new PathFinder(map);
 }
 
-void Unit::setDestination(Point posArrival) {
+void Unit::setDestination(Map *map, Point posArrival) {
 	Point dest = posArrival - offsetDraw;
 	arrivalPos = dest;
 	arrivalCasePos = Map::getPos(dest);
+	if(!map->isWalkable(arrivalCasePos)) return;	
 
 	if(casePosition == Map::getPos(dest)) return;
-	pathFinder->setDestination(casePosition,Map::getPos(dest));
+	pathFinder->setDestination(casePosition,arrivalCasePos);
 	path = pathFinder->getPoints();
 	hasDestination = true;
 }

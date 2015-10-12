@@ -11,6 +11,8 @@
 #include "buildGround.h"
 #include "obstacleGround.h"
 
+enum Type {INTEGER, FLOAT};
+
 class Map {
 	public:
 		Map();
@@ -20,7 +22,7 @@ class Map {
 		void update(float dt);
 		Point getSizeMap();
 		Point getSizeTile();
-		static Point getPos(Point pos);
+		static Point getPos(Point pos, Type t = INTEGER);
 		bool validPoint(Point &pos);
 		void setColorTile(Point pos, sf::Color color);
 		static Point getCenterCase(Point pos);

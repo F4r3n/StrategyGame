@@ -16,7 +16,7 @@ class Group {
 		bool refreshGroup();
 		std::vector<Action*> allowedAction();
 		void initPathFinder(Map *map);
-		void setDestination(Point arrivalPos);
+		void setDestination(Map *map, Point arrivalPos);
 		int getIdGroup();
 		bool getDelete();
 		void resetColor();

@@ -21,7 +21,7 @@ class Unit: public ClickableObject {
 		int type = -1;
 		bool runningAction = false;
 		void initPathFinder(Map *map);
-		void setDestination(Point posArrival);
+		void setDestination(Map *map, Point posArrival);
 		void setBucket(int id);
 		Point getPos();
 		int getIdBucket();

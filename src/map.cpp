@@ -31,8 +31,16 @@ Map::Map(int w, int h, int wt, int ht): widthMap(w), heightMap(h) {
 	}
 }
 
-Point Map::getPos(Point pos) {
+Point Map::getPos(Point pos, Type t) {
+	if(t == Type::INTEGER) {
 		return Point(pos.x/widthTile, pos.y/heightTile);
+	}
+	if( t == Type::FLOAT) {
+		std::cout << "test "<< static_cast<float>(pos.x)/static_cast<float>(widthTile) << std::endl;
+		int x = floor(static_cast<float>(pos.x)/static_cast<float>(widthTile));
+		int y = floor(static_cast<float>(pos.y)/static_cast<float>(heightTile));
+		return Point(x,y);
+	}
 }
 
 
@@ -72,11 +80,11 @@ Map::Map(const std::string &path) {
 		Case *ca;
 		switch(p){
 			case 1:
-			ca = new Case(new BuildGround(Point(i*widthTile, j*heightTile), Point(widthTile, heightTile)));
-			break;
+				ca = new Case(new BuildGround(Point(i*widthTile, j*heightTile), Point(widthTile, heightTile)));
+				break;
 			case 2:
-			ca = new Case(new ObstacleGround(Point(i*widthTile, j*heightTile), Point(widthTile, heightTile)));
-			break;
+				ca = new Case(new ObstacleGround(Point(i*widthTile, j*heightTile), Point(widthTile, heightTile)));
+				break;
 		}
 
 		std::shared_ptr<Case> rect (ca);
@@ -93,10 +101,10 @@ Map::Map(const std::string &path) {
 	for(i=0;i<heightMap;i++) {
 		for(j=0;j<widthMap;j++) {
 
-		std::shared_ptr<sf::RectangleShape> rect (new sf::RectangleShape(sf::Vector2f(widthTile,heightTile)));
-		rect->setPosition(j*widthTile, i*heightTile);
-		rect->setFillColor(sf::Color(0,0,0,0));
-		tilesTemp->push_back(rect);
+			std::shared_ptr<sf::RectangleShape> rect (new sf::RectangleShape(sf::Vector2f(widthTile,heightTile)));
+			rect->setPosition(j*widthTile, i*heightTile);
+			rect->setFillColor(sf::Color(0,0,0,0));
+			tilesTemp->push_back(rect);
 		}
 	}
 }

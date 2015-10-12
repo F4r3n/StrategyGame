@@ -36,6 +36,7 @@ class PathFinder {
 		void setDestination(Point currentPos,Point dest);
 		void retrievePath(Node *lastNode);
 		void reset();
+		bool cornerCrossed(Point current, Point next);
 		std::vector<Point>* getPoints();
 
 	private:

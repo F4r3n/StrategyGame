@@ -12,6 +12,13 @@ PathFinder::PathFinder(Map *map):map(map) {
 			bmap[i][j] = true;
 }
 
+bool PathFinder::cornerCrossed(Point current, Point next) {
+	Point dir = next - current;
+	if(map->isWalkable(Point(current.x+dir.x,current.y)) && map->isWalkable(Point(current.x, current.y + dir.y))) {
+		return true;
+	}
+	return false;
+}
 
 std::vector<Node*> PathFinder::nearestCases(Node *nextPosition, float offset) {
 	std::vector<Node*> nodes;
@@ -20,11 +27,11 @@ std::vector<Node*> PathFinder::nearestCases(Node *nextPosition, float offset) {
 		for(int j=-1; j<2;j++) {
 			//	if(abs(i) == abs(j)) continue;
 			Point pos(nextPosition->currentPos.x + i, nextPosition->currentPos.y + j);
-			if(map->validPoint(pos) && bmap[pos.x][pos.y] && map->isWalkable(pos)) {
+			if(map->isWalkable(pos) && bmap[pos.x][pos.y] && cornerCrossed(nextPosition->currentPos, pos)) {
 
 				new_cost = cost[nextPosition->currentPos] +  euclideanDistance(nextPosition->currentPos, pos);
 				cost[pos] = new_cost;
-				
+
 				map->setColorTile(pos, sf::Color(100,0,0));
 				mapPoints.insert(std::pair<Point,Point>(pos, nextPosition->currentPos));
 				Node *n = new Node();
@@ -76,7 +83,7 @@ PathFinder::~PathFinder() {
 
 void PathFinder::reset() {
 
-mapPoints.clear();
+	mapPoints.clear();
 	points.clear();
 	map->reset();
 
@@ -133,7 +140,7 @@ std::vector<Point>* PathFinder::getPoints() {
 
 void PathFinder::retrievePath(Node *lastNode) {
 	Point current = destination;
-//	std::cout << "path found" <<std::endl;
+	//	std::cout << "path found" <<std::endl;
 	while(current != start) {
 		map->setColorTile(current, sf::Color::Red);
 		points.push_back(current);
