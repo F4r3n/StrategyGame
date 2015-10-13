@@ -3,6 +3,7 @@
 
 #include <array>
 #include <memory>
+#include <map>
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include "bucket.h"
@@ -20,6 +21,7 @@ class ManagerBucket {
 
 	private:
 		std::vector<std::shared_ptr<Bucket>> buckets;
+		std::map<int,std::vector<std::shared_ptr<Bucket> > > groupBucket;
 		std::vector<Unit*> changeBucket;
 };
 
