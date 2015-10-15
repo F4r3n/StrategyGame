@@ -22,10 +22,10 @@ class Box {
 		bool AABB(const Rect &rect);
 		bool pointer(const Point &pos);
 		void updateOffset(Point offset, Point current);
-		sf::RectangleShape* getShape();
+	//	sf::RectangleShape* getShape();
 		float x,w,y,h;
 	private:
-		sf::RectangleShape *shape;
+	//	sf::RectangleShape *shape;
 		
 
 };

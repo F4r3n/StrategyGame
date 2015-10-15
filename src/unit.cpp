@@ -88,6 +88,8 @@ void Unit::update(float dt, Point posMouse, Map *map, std::vector<Unit*> &otherU
 	casePosition = Map::getPos(currentPos);
 	float dx = 0;
 	float dy = 0;
+//	float posX = box->x;
+//	float posY = box->y;
 	Point tempSpeed = speed;
 	if(hasDestination) {
 		Point tempPos;
@@ -129,19 +131,28 @@ void Unit::update(float dt, Point posMouse, Map *map, std::vector<Unit*> &otherU
 
 	}
 
+	float tempx = x + tempSpeed.x * dt * dx;
+	float tempy = y + tempSpeed.y * dt * dy;
+	Box b(tempx, box->w, tempy, box->h);
 	for(auto &other : otherUnits) {
-		if(id != other->id && box->AABB(other->box)) {
-			
-			other->x += dx*10;
-			other->y += dy*10;
-			dx = 0;	
-			dy = 0;	
+		if(id != other->id && other->box->AABB(b)) {
+
+			if(other->getBelonging() != getBelonging()) {
+				dx = 0;	
+				dy = 0;	
+			} else {
+				float tx = other->x + dx*10;
+				float ty = other->y + dy*10;
+				if(map->isWalkable(Map::getPos(Point(tx,ty)))) {
+					other->x += dx*10;
+					other->y += dy*10;
+				}
+			}
 		}
 	}
-//	std::cout << Map::getPos(Point(x,y)) << std::endl;
-	if(!map->isWalkable(Map::getPos(Point(x,y)))) {
-		dx = 0;
-		dy = 0;
+	//	std::cout << Map::getPos(Point(x,y)) << std::endl;
+	if(!map->isWalkable(Map::getPos(Point(tempx,tempy)))) {
+
 	}
 
 	x += tempSpeed.x * dt * dx;

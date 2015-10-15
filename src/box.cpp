@@ -2,10 +2,10 @@
 
 #include <iostream>
 Box::Box(float x,float w, float y, float h) : x(x), w(w),y(y),h(h) {
-	shape = new sf::RectangleShape();
+/*	shape = new sf::RectangleShape();
 	shape->setSize(sf::Vector2f(w,h));
 	shape->setPosition(x,y);
-	shape->setFillColor(sf::Color::Black);
+	shape->setFillColor(sf::Color::Black);*/
 }
 
 Box::Box(Point pos, Point size) {
@@ -13,10 +13,10 @@ Box::Box(Point pos, Point size) {
 	y = pos.y;
 	w = size.x;
 	h = size.y;
-	shape = new sf::RectangleShape();
+/*	shape = new sf::RectangleShape();
 	shape->setSize(sf::Vector2f(w,h));
 	shape->setPosition(x,y);
-	shape->setFillColor(sf::Color::Black);
+	shape->setFillColor(sf::Color::Black);*/
 }
 
 Box::Box(const Rect &rect) {
@@ -24,10 +24,10 @@ Box::Box(const Rect &rect) {
 	y = rect.y;
 	w = rect.w;
 	h = rect.h;
-	shape = new sf::RectangleShape();
+/*	shape = new sf::RectangleShape();
 	shape->setSize(sf::Vector2f(w,h));
 	shape->setPosition(x,y);
-	shape->setFillColor(sf::Color::Black);
+	shape->setFillColor(sf::Color::Black);*/
 }
 
 void Box::updateOffset(Point offset, Point current) {
@@ -35,20 +35,20 @@ void Box::updateOffset(Point offset, Point current) {
 //	int ay = current.y - offset.y;	
 }
 
-sf::RectangleShape* Box::getShape() {
-	return shape;
-}
+/*sf::RectangleShape* Box::getShape() {
+//	return shape;
+}*/
 
 Box::Box() {
 	
-	shape = new sf::RectangleShape();
+//	shape = new sf::RectangleShape();
 }
 
 void Box::configure(Point size, Point pos, sf::Color color) {
-	shape->setSize(sf::Vector2f(size.x,size.y));
+/*	shape->setSize(sf::Vector2f(size.x,size.y));
 	shape->setPosition(pos.x, pos.y);
 
-	shape->setFillColor(color);
+	shape->setFillColor(color);*/
 	x = pos.x;
 	y = pos.y;
 	w = size.x;
@@ -69,7 +69,7 @@ bool Box::AABB(const Point pos, const Point size) {
 
 
 Box::~Box() {
-	delete shape;
+//	delete shape;
 }
 
 float Box::getCenterX() const {

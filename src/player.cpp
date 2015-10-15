@@ -113,6 +113,7 @@ void Player::update(float dt, Map *map, Interface *interface, Point pos, Point p
 		for(auto *unit : *units) {
 			if(unit->isSelected(pos)) {
 				if(unit->getBelonging() == 0) {
+					resetSelectedUnits();
 					selectedUnits.push_back(unit);
 					//	if(currentGroup != nullptr) currentGroup->resetColor();
 					unit->setSelected(true);
