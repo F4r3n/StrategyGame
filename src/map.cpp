@@ -36,7 +36,6 @@ Point Map::getPos(Point pos, Type t) {
 		return Point(pos.x/widthTile, pos.y/heightTile);
 	}
 	if( t == Type::FLOAT) {
-		std::cout << "test "<< static_cast<float>(pos.x)/static_cast<float>(widthTile) << std::endl;
 		int x = floor(static_cast<float>(pos.x)/static_cast<float>(widthTile));
 		int y = floor(static_cast<float>(pos.y)/static_cast<float>(heightTile));
 		return Point(x,y);

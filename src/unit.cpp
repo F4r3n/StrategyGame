@@ -84,14 +84,15 @@ void Unit::setGroup(bool val) {
 	hasGroup = val;
 }
 
-void Unit::update(float dt, Point posMouse, Map *map) {
+void Unit::update(float dt, Point posMouse, Map *map, std::vector<Unit*> &otherUnits) {
 	casePosition = Map::getPos(currentPos);
+	float dx = 0;
+	float dy = 0;
+	Point tempSpeed = speed;
 	if(hasDestination) {
 		Point tempPos;
 		Point tempSpeed = speed;
 
-		float dx;
-		float dy;
 		Point pos = path->front();
 		tempPos = Map::getCenterCase(pos); 
 		float norme = sqrt(pow((currentPos.x - tempPos.x), 2) + pow((currentPos.y - tempPos.y), 2));
@@ -126,13 +127,29 @@ void Unit::update(float dt, Point posMouse, Map *map) {
 			}
 		}
 
-		x += tempSpeed.x * dt * dx;
-		y += tempSpeed.y * dt * dy;
-		box->x = x;
-		box->y = y;
-		currentPos.x = box->x;
-		currentPos.y = box->y;
 	}
+
+	for(auto &other : otherUnits) {
+		if(id != other->id && box->AABB(other->box)) {
+			
+			other->x += dx*10;
+			other->y += dy*10;
+			dx = 0;	
+			dy = 0;	
+		}
+	}
+//	std::cout << Map::getPos(Point(x,y)) << std::endl;
+	if(!map->isWalkable(Map::getPos(Point(x,y)))) {
+		dx = 0;
+		dy = 0;
+	}
+
+	x += tempSpeed.x * dt * dx;
+	y += tempSpeed.y * dt * dy;
+	box->x = x;
+	box->y = y;
+	currentPos.x = box->x;
+	currentPos.y = box->y;
 }
 
 Unit::~Unit() {}

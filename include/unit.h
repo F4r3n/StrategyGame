@@ -9,7 +9,7 @@ class Unit: public ClickableObject {
 		Unit(int belonging, Point pos, int life);
 		virtual ~Unit();
 		virtual void draw(sf::RenderWindow &window);
-		virtual void update(float dt, Point posMouse, Map *map);
+		virtual void update(float dt, Point posMouse, Map *map, std::vector<Unit*> &otherUnits);
 		bool isSelected(const Point &posMouse);
 		bool isSelected(Rect &rect);
 		bool isGrouped();

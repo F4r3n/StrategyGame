@@ -18,7 +18,7 @@ class Bucket {
 		std::vector<Unit*> refresh();
 		int getId() const;
 		Point getPos() const;
-		std::vector<Unit*> getVectorUnits();
+		std::vector<Unit*> getVectorUnits(int id);
 	private:
 
 		std::unique_ptr<sf::RectangleShape> shape;

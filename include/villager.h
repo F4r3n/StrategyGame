@@ -12,7 +12,7 @@ class Villager final : public Unit {
 		Villager(int belonging, Point pos, int life, float attack);
 		void changeColor();
 		void draw(sf::RenderWindow &window);
-		void update(float dt, Point posMouse, Map *map);
+		void update(float dt, Point posMouse, Map *map, std::vector<Unit*> &otherUnits);
 	private:
 		sf::CircleShape *shape;
 		sf::Color normalColor;

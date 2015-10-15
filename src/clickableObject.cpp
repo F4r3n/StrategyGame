@@ -5,11 +5,8 @@
 int ClickableObject::idTemp = 0; 
 
 ClickableObject::ClickableObject(int belonging): belonging(belonging){
-	std::cout << "create unit " << ClickableObject::idTemp << std::endl;
 	ClickableObject::idTemp++;
 	id = idTemp;
-	
-	std::cout << "unit created " << id << std::endl;
 }
 
 ClickableObject::ClickableObject() {}

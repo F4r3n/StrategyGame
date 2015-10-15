@@ -40,10 +40,8 @@ void Villager::draw(sf::RenderWindow &window) {
 
 }
 
-void Villager::update(float dt, Point posMouse, Map *map) {
-//	if(selected) std::cout << idBucket << std::endl;
-	Unit::update(dt,posMouse,map);
-//	box->updateOffset(offsetDraw, Point(box->x, box->y));
+void Villager::update(float dt, Point posMouse, Map *map, std::vector<Unit*> &otherUnits) {
+	Unit::update(dt,posMouse,map, otherUnits);
 	shape->setPosition(box->x, box->y);
 	
 	//if(box == 0) std::cout << "null" << std::endl;

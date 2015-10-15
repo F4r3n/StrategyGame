@@ -35,10 +35,12 @@ int Bucket::getId() const {
 	return id;
 }
 
-std::vector<Unit*> Bucket::getVectorUnits() {
+std::vector<Unit*> Bucket::getVectorUnits(int id) {
 	std::vector<Unit*> u;
 	for(auto &unit: units) { 
+		if(unit.first != id) {
 		u.push_back(unit.second);
+		}
 	}
 	return u;
 }
@@ -51,15 +53,15 @@ void Bucket::addUnit(Unit *unit) {
 void Bucket::update(float dt, Point posMouse, Map *map, std::vector<std::shared_ptr<Bucket> > &otherBuckets) {
 	std::vector<Unit*> u;
 	std::vector<Unit*> otherBucketsUnits;
+	
 	for(auto bu : otherBuckets) {
-		std::vector<Unit*> otherBucketsUnits = bu->getVectorUnits();
+		std::vector<Unit*> otherBucketsUnits = bu->getVectorUnits(-1);
 		u.insert(u.begin(), otherBucketsUnits.begin(), otherBucketsUnits.end());
 	}
-	otherBucketsUnits = getVectorUnits();
+	otherBucketsUnits = getVectorUnits(-1);
 	u.insert(u.begin(), otherBucketsUnits.begin(), otherBucketsUnits.end());
 	for(auto &unit: units) { 
-		//	std::cout << id << " " << unit.second->getPos() << std::endl;
-		unit.second->update(dt,posMouse,map);
+		unit.second->update(dt,posMouse,map, u);
 	}
 
 }
@@ -76,7 +78,7 @@ std::vector<Unit*> Bucket::refresh() {
 }
 
 void Bucket::draw(sf::RenderWindow &window) {
-	window.draw(*shape);
+//	window.draw(*shape);
 	for(auto &unit: units) 
 		unit.second->draw(window);
 }
