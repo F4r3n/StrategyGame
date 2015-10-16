@@ -7,6 +7,8 @@ int Map::heightTile = 0;
 Map::Map() {}
 
 Map::Map(int w, int h, int wt, int ht): widthMap(w), heightMap(h) {
+	widthMapPixel = widthMap * widthTile;
+	heightMapPixel = heightMap * heightTile;
 	tiles = new std::vector<std::shared_ptr<Case> >();
 	widthTile = wt;
 	heightTile = ht;
@@ -59,6 +61,13 @@ void Map::reset() {
 Point Map::getSizeTile() {
 	return Point(widthTile, heightTile);
 }
+bool Map::isWalkable(const Box &box) {
+	Point pos = getPos(Point(box.x, box.y));
+	if(validPoint(box)) {
+		return tiles->at(pos.y*widthMap + pos.x)->isWalkable();
+	}
+	return false;
+}
 
 bool Map::isWalkable(Point pos) {
 	if(validPoint(pos)) {
@@ -67,10 +76,27 @@ bool Map::isWalkable(Point pos) {
 	return false;
 }
 
+void Map::setUnitOn(Point pos, bool value) {
+
+	if(validPoint(pos)) {
+		tiles->at(pos.y*widthMap + pos.x)->setUnitOn(value);
+	}
+}
+
+bool Map::isUnitOn(Point pos) {
+
+	if(validPoint(pos)) {
+		return tiles->at(pos.y*widthMap + pos.x)->isUnitOn();
+	}
+	return false;
+}
+
 Map::Map(const std::string &path) {
 	char c;
 	std::ifstream fin(path, std::ifstream::in);
 	fin >> widthMap >> heightMap >> widthTile >> heightTile;
+	widthMapPixel = widthMap * widthTile;
+	heightMapPixel = heightMap * heightTile;
 	tiles = new std::vector<std::shared_ptr<Case> >();
 	int i = 0;
 	int j = 0;
@@ -118,6 +144,10 @@ bool Map::validPoint(Point &pos) {
 	return true;
 }
 
+bool Map::validPoint(const Box &box) {
+		if(box.x <= 0 || box.x + box.w >= widthMapPixel || box.y <= 0 || box.y + box.h >= heightMapPixel ) return false; 
+	return true;
+}
 void Map::draw(sf::RenderWindow &window) {
 	for(auto tile : *tiles) {
 		tile->draw(window);
@@ -127,8 +157,7 @@ void Map::draw(sf::RenderWindow &window) {
 	}
 }
 
-void Map::update(float dt) {
-}
+void Map::update(float dt) {}
 
 Map::~Map() {
 	delete tiles;

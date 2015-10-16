@@ -25,6 +25,8 @@ class Unit: public ClickableObject {
 		void setBucket(int id);
 		Point getPos();
 		int getIdBucket();
+		void onCollision(Map *map, Unit *other);
+		float dx,dy;
 
 	protected:
 		int idBucket = -1;
@@ -32,6 +34,8 @@ class Unit: public ClickableObject {
 		Point speed;
 		float x = 0;
 		float y = 0;
+		bool isIdling = true;
+		bool isAttacking = false;
 		Point currentPos;
 		Point arrivalCasePos;
 		Point arrivalPos;

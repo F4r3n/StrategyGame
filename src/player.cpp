@@ -13,8 +13,10 @@ Player::Player(Map *map) {
 	shape->setOutlineColor(sf::Color(0,100,0));
 	units = new std::vector<Unit*>();
 	groups = new std::vector<Group*>();
-	units->push_back(new Villager(0, Point(300,300),100,10));
-	units->push_back(new Villager(0, Point(200,200),100,10));
+	for(int i = 0; i < 5; i++) {
+
+	units->push_back(new Villager(0, Point(200 + i*50  ,200),100,10));
+	}
 	bucketManager.addUnit(units);
 	Input::actionsClick["selectSingle"] = true;
 	Input::actionsClick["selectGroup"] = true;

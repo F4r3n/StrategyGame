@@ -10,6 +10,14 @@ bool Case::isWalkable() {
 	return ground->isWalkable();
 }
 
+void Case::setUnitOn(bool value) {
+	ground->unitOn = value;
+}
+
+bool Case::isUnitOn() {
+	return ground->unitOn;
+}
+
 void Case::draw(sf::RenderWindow &window) {
 	sf::Vector2f s(window.getView().getSize());
 	sf::Vector2f p(window.getView().getCenter());

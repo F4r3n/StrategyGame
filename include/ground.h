@@ -13,6 +13,7 @@ class Ground{
 		virtual void draw(sf::RenderWindow &window);
 		virtual void update(float dt);
 		bool isWalkable();
+		bool unitOn = false;
 
 	protected:
 		Point pos;

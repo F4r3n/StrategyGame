@@ -14,6 +14,8 @@ class Case {
 		void draw(sf::RenderWindow &window);
 		void update(float dt);
 		bool isWalkable();
+		void setUnitOn(bool value);
+		bool isUnitOn();
 	private:
 		bool isReachable = true;
 		std::unique_ptr<Ground> ground;

@@ -47,19 +47,15 @@ std::vector<Node*> PathFinder::nearestCases(Node *nextPosition, float offset) {
 }
 
 float PathFinder::euclideanDistance(Point pa, Point pb) {
-
 	float a  = pow((pa.x - pb.x),2);
-
 	float b  = pow((pa.y - pb.y),2);
 	return sqrt(a+b);
 }
 
 float PathFinder::euclideanDistance(Point newDistance) {
 	float a  = pow((newDistance.x-destination.x),2);
-
 	float b  = pow((newDistance.y-destination.y),2);
 	return sqrt(a+b);
-	//	return sqrt(pow((newDistance.x-destination.x),2) + pow((newDistance.y - destination.x),2));
 }
 
 float PathFinder::chebyshevDistance(Point newDistance) {
@@ -68,12 +64,9 @@ float PathFinder::chebyshevDistance(Point newDistance) {
 	return std::max(a,b);
 }
 
-PathFinder::PathFinder() {
-
-}
+PathFinder::PathFinder() {}
 
 PathFinder::~PathFinder() {
-
 	Point size = map->getSizeMap();
 	for(int i=0;i<size.y;i++) {
 		delete bmap[i];

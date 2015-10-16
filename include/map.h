@@ -24,14 +24,19 @@ class Map {
 		Point getSizeTile();
 		static Point getPos(Point pos, Type t = INTEGER);
 		bool validPoint(Point &pos);
+		bool validPoint(const Box &box);
 		void setColorTile(Point pos, sf::Color color);
 		static Point getCenterCase(Point pos);
 		bool isWalkable(Point pos);
+		bool isWalkable(const Box &box);
+		void setUnitOn(Point pos, bool value);
+		bool isUnitOn(Point pos);
 		void reset();
 		~Map();
 	
 	private:
 		int widthMap, heightMap;
+		int widthMapPixel, heightMapPixel;
 		static int widthTile;
 		static int heightTile;
 		std::vector<std::shared_ptr<Case> > *tiles;	

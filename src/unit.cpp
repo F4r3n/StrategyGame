@@ -84,12 +84,35 @@ void Unit::setGroup(bool val) {
 	hasGroup = val;
 }
 
+
+void Unit::onCollision(Map *map, Unit *other) {
+
+	if(other->getBelonging() != getBelonging()) {
+		dx = 0;	
+		dy = 0;
+		path->clear();
+		hasDestination = false;
+	} else {
+		float tx = other->x + dx;
+		float ty = other->y + dy;
+		if(map->isWalkable(Box(tx, other->box->w, ty, other->box->h))) {
+			other->dx += dx*2;
+			other->dy += dy*2;
+		//	path->clear();
+		//	hasDestination = false;
+			dx = 0;
+			dy = 0;
+		} else {
+			dx = 0;
+			dy = 0;
+		//	path->clear();
+		//	hasDestination = false;
+		}
+	}
+}
+
 void Unit::update(float dt, Point posMouse, Map *map, std::vector<Unit*> &otherUnits) {
 	casePosition = Map::getPos(currentPos);
-	float dx = 0;
-	float dy = 0;
-//	float posX = box->x;
-//	float posY = box->y;
 	Point tempSpeed = speed;
 	if(hasDestination) {
 		Point tempPos;
@@ -136,21 +159,9 @@ void Unit::update(float dt, Point posMouse, Map *map, std::vector<Unit*> &otherU
 	Box b(tempx, box->w, tempy, box->h);
 	for(auto &other : otherUnits) {
 		if(id != other->id && other->box->AABB(b)) {
-
-			if(other->getBelonging() != getBelonging()) {
-				dx = 0;	
-				dy = 0;	
-			} else {
-				float tx = other->x + dx*10;
-				float ty = other->y + dy*10;
-				if(map->isWalkable(Map::getPos(Point(tx,ty)))) {
-					other->x += dx*10;
-					other->y += dy*10;
-				}
-			}
+			onCollision(map,other);
 		}
 	}
-	//	std::cout << Map::getPos(Point(x,y)) << std::endl;
 	if(!map->isWalkable(Map::getPos(Point(tempx,tempy)))) {
 
 	}
@@ -161,6 +172,10 @@ void Unit::update(float dt, Point posMouse, Map *map, std::vector<Unit*> &otherU
 	box->y = y;
 	currentPos.x = box->x;
 	currentPos.y = box->y;
+
+	isIdling = hasDestination || isAttacking;
+	dx = 0;
+	dy = 0;
 }
 
 Unit::~Unit() {}

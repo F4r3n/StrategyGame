@@ -58,8 +58,8 @@ void Bucket::update(float dt, Point posMouse, Map *map, std::vector<std::shared_
 		std::vector<Unit*> otherBucketsUnits = bu->getVectorUnits(-1);
 		u.insert(u.begin(), otherBucketsUnits.begin(), otherBucketsUnits.end());
 	}
-	otherBucketsUnits = getVectorUnits(-1);
-	u.insert(u.begin(), otherBucketsUnits.begin(), otherBucketsUnits.end());
+//	otherBucketsUnits = getVectorUnits(-1);
+//	u.insert(u.begin(), otherBucketsUnits.begin(), otherBucketsUnits.end());
 	for(auto &unit: units) { 
 		unit.second->update(dt,posMouse,map, u);
 	}
@@ -78,7 +78,7 @@ std::vector<Unit*> Bucket::refresh() {
 }
 
 void Bucket::draw(sf::RenderWindow &window) {
-//	window.draw(*shape);
+	window.draw(*shape);
 	for(auto &unit: units) 
 		unit.second->draw(window);
 }
