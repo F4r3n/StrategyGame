@@ -24,7 +24,6 @@ ManagerBucket::ManagerBucket(Point sizeMap, Point sizeTile) {
 				Point n;
 				n.x = pos.x + i;
 				n.y = pos.y + j;
-				int g = idBucket + i + j;
 				if(n.x >= 0 && n.y >= 0 && n.x < numberBucketLine && n.y < numberBucketCol) {
 					groupBucket[idBucket].push_back(buckets[n.y*numberBucketLine + n.x]);
 				}

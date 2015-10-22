@@ -14,6 +14,18 @@ void Case::setUnitOn(bool value) {
 	ground->unitOn = value;
 }
 
+void Case::setString(const std::string &s) {
+    ground->setString(s);
+}
+
+void Case::setVector(Point vector) {
+    this->vector = vector;
+}
+
+Point Case::getVector() {
+    return vector;
+}
+
 bool Case::isUnitOn() {
 	return ground->unitOn;
 }
@@ -24,6 +36,13 @@ void Case::draw(sf::RenderWindow &window) {
 //	std::cout << b.x << " " << b.y << " " << b.w << " " << b.h << std::endl;
 	if(box->AABB(Point(p,-400,-300),Point(s)))
 		ground->draw(window);
+}
+void Case::setWeight(int w) {
+    weight = w;
+    ground->setString(std::to_string(w));
+}
+int Case::getWeight() {
+    return weight;
 }
 
 void Case::update(float dt) {

@@ -1,7 +1,7 @@
 
 #include "obstacleGround.h"
 
-ObstacleGround::ObstacleGround(Point pos, Point size): Ground(pos,size) {
+ObstacleGround::ObstacleGround(Point pos, Point size, sf::Font *font): Ground(pos,size, font) {
 	shape = std::unique_ptr<sf::RectangleShape>(new sf::RectangleShape());
 	shape->setSize(sf::Vector2f(size.x, size.y));
 	shape->setPosition(pos.x, pos.y);

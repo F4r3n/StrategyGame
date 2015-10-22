@@ -6,7 +6,7 @@
 
 class BuildGround final : public Ground{
 	public:
-		BuildGround(Point pos, Point size);
+		BuildGround(Point pos, Point size, sf::Font *font);
 		~BuildGround();
 		void draw(sf::RenderWindow &window);
 		void update(float dt);

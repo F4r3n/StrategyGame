@@ -78,7 +78,7 @@ std::vector<Unit*> Bucket::refresh() {
 }
 
 void Bucket::draw(sf::RenderWindow &window) {
-	window.draw(*shape);
+//	window.draw(*shape);
 	for(auto &unit: units) 
 		unit.second->draw(window);
 }

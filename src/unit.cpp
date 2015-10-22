@@ -51,7 +51,7 @@ int Unit::getIdBucket() {
 }
 
 void Unit::initPathFinder(Map *map) {
-	pathFinder = new PathFinder(map);
+	pathFinder = new PathFinder(map, box);
 }
 
 void Unit::setDestination(Map *map, Point posArrival) {
@@ -110,6 +110,8 @@ void Unit::onCollision(Map *map, Unit *other) {
 		}
 	}
 }
+
+
 
 void Unit::update(float dt, Point posMouse, Map *map, std::vector<Unit*> &otherUnits) {
 	casePosition = Map::getPos(currentPos);

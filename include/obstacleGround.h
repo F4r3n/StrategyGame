@@ -7,7 +7,7 @@
 
 class ObstacleGround : public Ground{
 	public:
-		ObstacleGround(Point pos, Point size);
+		ObstacleGround(Point pos, Point size, sf::Font *font);
 		~ObstacleGround();
 		void draw(sf::RenderWindow &window);
 		void update(float dt);

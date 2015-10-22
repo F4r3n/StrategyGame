@@ -12,6 +12,7 @@ typedef struct Node {
 	Point currentPos;
 	float weight;
 	struct Node *parent;
+    int dist;
 	bool operator<(Node *n) const {
 		return weight > n->weight;
 	}
@@ -25,7 +26,7 @@ class Comparator {
 };
 class PathFinder {
 	public:
-		PathFinder(Map *map);
+		PathFinder(Map *map, Box *box);
 		PathFinder();
 		std::vector<Node*> nearestCases(Node *nextPosition, float offset);
 		float euclideanDistance(Point point);
@@ -37,6 +38,7 @@ class PathFinder {
 		void retrievePath(Node *lastNode);
 		void reset();
 		bool cornerCrossed(Point current, Point next);
+        void setIntegrationField();
 		std::vector<Point>* getPoints();
 
 	private:
@@ -47,6 +49,7 @@ class PathFinder {
 		std::map<Point, Point> mapPoints;
 		std::map<Point, int> cost;
 		Map *map;
+        Box *box;
 		bool **bmap;
 };
 

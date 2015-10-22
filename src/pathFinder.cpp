@@ -1,6 +1,6 @@
 #include "pathFinder.h"
 #include <iostream>
-PathFinder::PathFinder(Map *map):map(map) {
+PathFinder::PathFinder(Map *map, Box *box):map(map), box(box) {
 	Point size = map->getSizeMap();
 	bmap = new bool*[size.y];
 	for(int i=0;i<size.y;i++) {
@@ -32,7 +32,7 @@ std::vector<Node*> PathFinder::nearestCases(Node *nextPosition, float offset) {
 				new_cost = cost[nextPosition->currentPos] +  euclideanDistance(nextPosition->currentPos, pos);
 				cost[pos] = new_cost;
 
-				map->setColorTile(pos, sf::Color(100,0,0));
+			//	map->setColorTile(pos, sf::Color(100,0,0));
 				mapPoints.insert(std::pair<Point,Point>(pos, nextPosition->currentPos));
 				Node *n = new Node();
 				n->currentPos = pos;
@@ -46,108 +46,153 @@ std::vector<Node*> PathFinder::nearestCases(Node *nextPosition, float offset) {
 	return nodes;
 }
 
+
+
+void PathFinder::setIntegrationField() {
+    reset();
+    std::queue<Node*> nodes;
+    Node *n =new Node;
+    n->currentPos = destination;
+    bmap[destination.x][destination.y] = false;
+    int weight = 0;
+     map->setText(destination, std::to_string(weight));
+    n->weight = weight;
+    nodes.push(n);
+    do {
+        Node *nextNode = nodes.front();
+        weight = nextNode->weight + 1;
+        Point nextPosition = nextNode->currentPos;
+        nodes.pop();
+        for(int i=-1; i< 2;i++) {
+            for(int j=-1; j<2;j++) {
+                //	if(abs(i) == abs(j)) continue;
+                Point pos(nextPosition.x + i, nextPosition.y + j);
+                if(map->isWalkable(pos) && bmap[pos.x][pos.y]) {
+
+                    Node *o = new Node;
+                    o->currentPos = pos;
+                    o->weight = weight;
+                    bmap[pos.x][pos.y] = false;
+                    nodes.push(o);
+                    map->setText(pos, std::to_string(weight));
+                    if(pos == start) return;
+                }
+            }
+        }
+        for(int i=-1; i< 2;i++) {
+            for(int j=-1; j<2;j++) {
+                //	if(abs(i) == abs(j)) continue;
+                Point pos(nextPosition.x + i, nextPosition.y + j);
+                Point vector;
+            }
+        }
+    }while(nodes.size()>0);
+
+}
+
 float PathFinder::euclideanDistance(Point pa, Point pb) {
-	float a  = pow((pa.x - pb.x),2);
-	float b  = pow((pa.y - pb.y),2);
-	return sqrt(a+b);
+    float a  = pow((pa.x - pb.x),2);
+    float b  = pow((pa.y - pb.y),2);
+    return sqrt(a+b);
 }
 
 float PathFinder::euclideanDistance(Point newDistance) {
-	float a  = pow((newDistance.x-destination.x),2);
-	float b  = pow((newDistance.y-destination.y),2);
-	return sqrt(a+b);
+    float a  = pow((newDistance.x-destination.x),2);
+    float b  = pow((newDistance.y-destination.y),2);
+    return sqrt(a+b);
 }
 
 float PathFinder::chebyshevDistance(Point newDistance) {
-	float a = abs(newDistance.x - destination.x);
-	float b = abs(newDistance.y - destination.y);
-	return std::max(a,b);
+    float a = abs(newDistance.x - destination.x);
+    float b = abs(newDistance.y - destination.y);
+    return std::max(a,b);
 }
 
 PathFinder::PathFinder() {}
 
 PathFinder::~PathFinder() {
-	Point size = map->getSizeMap();
-	for(int i=0;i<size.y;i++) {
-		delete bmap[i];
-	}
-	delete bmap;
+    Point size = map->getSizeMap();
+    for(int i=0;i<size.y;i++) {
+        delete bmap[i];
+    }
+    delete bmap;
 }
 
 void PathFinder::reset() {
 
-	mapPoints.clear();
-	points.clear();
-	map->reset();
+    mapPoints.clear();
+    points.clear();
+    map->reset();
 
-	Point size = map->getSizeMap();
-	for(int i=0;i<size.y;i++)
-		for(int j = 0; j < size.x; j++)
-			bmap[i][j] = true;
+    Point size = map->getSizeMap();
+    for(int i=0;i<size.y;i++)
+        for(int j = 0; j < size.x; j++)
+            bmap[i][j] = true;
 }
 
 void PathFinder::setDestination(Point currentPos, Point dest) {
-	destination = dest;
-	start = currentPos;
-	reset();
-	bmap[currentPos.x][currentPos.y] = false;
+    destination = dest;
+    start = currentPos;
+    setIntegrationField();
+    reset();
+    bmap[currentPos.x][currentPos.y] = false;
 
-	Node *firstNode = new Node();
-	firstNode->currentPos = currentPos;
-	firstNode->parent = nullptr;
-	firstNode->weight = euclideanDistance(currentPos);
+    Node *firstNode = new Node();
+    firstNode->currentPos = currentPos;
+    firstNode->parent = nullptr;
+    firstNode->weight = euclideanDistance(currentPos);
 
-	this->currentPosition = currentPos;
-	std::priority_queue<Node*,std::vector<Node*>,Comparator> nodes;
-	std::vector<Node*> vnodes = nearestCases(firstNode,0);
-	fillNodes(nodes, vnodes);
-	int i = 0;
-	Point nextPosition;
-	Node *currentNode;
-	mapPoints.insert(std::pair<Point,Point>(firstNode->currentPos, firstNode->currentPos));
-	cost[firstNode->currentPos] = 0;
-	do{
-		currentNode = nodes.top();
+    this->currentPosition = currentPos;
+    std::priority_queue<Node*,std::vector<Node*>,Comparator> nodes;
+    std::vector<Node*> vnodes = nearestCases(firstNode,0);
+    fillNodes(nodes, vnodes);
+    int i = 0;
+    Point nextPosition;
+    Node *currentNode;
+    mapPoints.insert(std::pair<Point,Point>(firstNode->currentPos, firstNode->currentPos));
+    cost[firstNode->currentPos] = 0;
+    do{
+        currentNode = nodes.top();
 
-		nextPosition = currentNode->currentPos;
-		nodes.pop();
-		std::vector<Node*> nextNodes = nearestCases(currentNode, 1);
-		fillNodes(nodes, nextNodes);
+        nextPosition = currentNode->currentPos;
+        nodes.pop();
+        std::vector<Node*> nextNodes = nearestCases(currentNode, 1);
+        fillNodes(nodes, nextNodes);
 
-		i++;
-		if(nodes.size() ==0) break;
-	}while(nextPosition != dest);
-	retrievePath(currentNode);
+        i++;
+        if(nodes.size() ==0) break;
+    }while(nextPosition != dest);
+    retrievePath(currentNode);
 
-	int s = nodes.size();
-	for(int i=0; i < s; i++) {
-		Node *n = nodes.top();
-		nodes.pop();
-		delete n;
-	}
+    int s = nodes.size();
+    for(int i=0; i < s; i++) {
+        Node *n = nodes.top();
+        nodes.pop();
+        delete n;
+    }
 }
 
 std::vector<Point>* PathFinder::getPoints() {
-	return &points;
+    return &points;
 }
 
 void PathFinder::retrievePath(Node *lastNode) {
-	Point current = destination;
-	//	std::cout << "path found" <<std::endl;
-	while(current != start) {
-		map->setColorTile(current, sf::Color::Red);
-		points.push_back(current);
-		current = mapPoints[current];
-		map->setColorTile(current, sf::Color::Red);
-	}
+    Point current = destination;
+    //	std::cout << "path found" <<std::endl;
+    while(current != start) {
+        //	map->setColorTile(current, sf::Color::Red);
+        points.push_back(current);
+        current = mapPoints[current];
+        //map->setColorTile(current, sf::Color::Red);
+    }
 
-	std::reverse(points.begin(), points.end());
+    std::reverse(points.begin(), points.end());
 
 }
 
 void PathFinder::fillNodes(std::priority_queue<Node*, std::vector<Node*>,Comparator> &nodes, std::vector<Node*> &vnodes) {
 
-	for(auto vnode : vnodes)
-		nodes.push(vnode);
-	vnodes.clear();
+    for(auto vnode : vnodes)
+        nodes.push(vnode);
+    vnodes.clear();
 }
